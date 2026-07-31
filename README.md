@@ -6,8 +6,8 @@ It orchestrates vulnerability scanning, dynamically routes tools, and seamlessly
 
 ---
 
-### A Quick Note on the Codebase
-*If you dive into the `src/` folder, you might notice something intense. I've added massive, obnoxious `# ==================== #` comment banners to the top of **literally every single file** (Python, Dockerfiles, YAMLs, you name it) so  you (and I) don't get lost in the sauce.*
+#### A Quick Note on the Codebase
+    *If you dive into the `src/` folder, you might notice something intense. I've added massive, obnoxious `# ==================== #` comment banners to the top of **literally every single file** (Python, Dockerfiles, YAMLs, you name it) so  you (and I) don't get lost in the sauce.*
 
 ---
 

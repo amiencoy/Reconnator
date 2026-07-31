@@ -1,4 +1,3 @@
----
 # Reconnator 2.0: The Cave-Sec AI Agent
 
 **Reconnator** has evolved. What started as a simple, scheduled passive reconnaissance script is now a fully interactive, AI-driven DevSecOps assistant. Powered by Google Gemini and the Model Context Protocol (MCP), Reconnator operates as a Telegram bot with a highly efficient, somewhat brutal AI persona. 

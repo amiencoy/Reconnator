@@ -21,7 +21,7 @@ It orchestrates vulnerability scanning, dynamically routes tools, and seamlessly
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 Ensure you have Python 3.11+ installed and the **Docker Engine** running on your host (Reconnator needs access to the Docker daemon to spawn its tools' containers).
 

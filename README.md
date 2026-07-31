@@ -77,7 +77,7 @@ helm install recon-bot . \
 ├── deploy/helm/          # Kubernetes Helm Chart (Deployment + DooD)
 ├── src/                  # Core Application
 │   ├── modules/          # Ephemeral Engines (nmap, ffuf, nuclei, subfinder, otx, report)
-│   ├── agent_core.py     # The AI Brain: Gemini routing & Cave-Sec persona
+│   ├── agent_core.py     # The AI Brain: Gemini routing & persona
 │   ├── mcp_server.py     # The Arsenal: MCP tool registration & schema mapping
 │   └── bot.py            # The Mouth & Ears: Telegram ChatOps entrypoint
 ├── Dockerfile            # Main Alpine-based bot container

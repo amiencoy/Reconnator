@@ -1,5 +1,20 @@
+# ==================================================================================== #
+# This is the Chart.yaml file. The metadata heart of our Kubernetes Helm deployment.   #
+# We've updated the description to reflect Reconnator's massive evolution from a       #
+# simple CLI script into an AI-driven, MCP-powered DevSecOps agent (Cave-Sec).         #
+# ==================================================================================== #
+
 apiVersion: v2
 name: reconnator
-description: A Cloud-Native Reconnaissance Bot for Bug Bounty
+description: A Cloud-Native, AI-Driven DevSecOps Reconnaissance Tools
+type: application
 version: 0.1.0
-appVersion: "1.0"
+appVersion: "2.0.0"
+keywords:
+  - recon
+  - bug-bounty
+  - devsecops
+  - ai-agent
+  - mcp
+maintainers:
+  - name: amiencoy

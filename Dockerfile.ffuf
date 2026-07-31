@@ -1,0 +1,19 @@
+# ==================================================================================== #
+# Custom FFUF Docker image build. Since there is no official prebuilt image available, #
+# I use a multi-stage build to compile it from source (Golang) and move the binary     #
+# into a lightweight Alpine container. This keeps the image size extremely small.      #
+# It also bakes in essential SecLists wordlists for 'quick' and 'deep' fuzzing modes.  #
+# ==================================================================================== #
+
+FROM golang:alpine AS builder
+RUN go install github.com/ffuf/ffuf/v2@latest
+
+FROM alpine:latest
+RUN apk add --no-cache wget ca-certificates
+COPY --from=builder /go/bin/ffuf /usr/local/bin/ffuf
+
+RUN mkdir -p /wordlists
+RUN wget -q -O /wordlists/quick.txt https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/common.txt
+RUN wget -q -O /wordlists/deep.txt https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/raft-small-directories.txt
+
+ENTRYPOINT ["ffuf"]

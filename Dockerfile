@@ -1,8 +1,23 @@
+# ==================================================================================== #
+# This is the main Dockerfile for Reconnator. The brain center of the Cave-Sec agent.  #
+# It builds a lightweight Alpine container to run the Telegram bot and the MCP server. #
+# CRITICAL: I install docker-cli so this container can spawn our ephemeral tool        #
+# containers (Nmap, Ffuf, Nuclei, Subfinder) using the host's Docker daemon (DooD).    #
+# NB: main.py is dead. The true entrypoint is now bot.py                               #
+# ==================================================================================== #
+
 FROM python:3.11-alpine
+
 LABEL maintainer="amiencoy"
 LABEL description="Reconnator - Modern Cloud-Native Recon Bot"
+
 WORKDIR /app
+
+RUN apk add --no-cache docker-cli
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+
 COPY src/ ./src/
-ENTRYPOINT ["python", "src/main.py"]
+
+ENTRYPOINT ["python", "src/bot.py"]

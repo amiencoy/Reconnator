@@ -1,27 +1,41 @@
+# ===================================================================================== #
+# This is the Nuclei engine module. The vulnerability sniper of our recon pipeline.     #
+# It runs asynchronously inside an ephemeral Docker container to blast known CVEs.      #
+# Because we've filtered the ghost targets using dnsx earlier, Nuclei can now focus     #
+# its firepower solely on active servers without hanging on annoying network timeouts.  #
+# ===================================================================================== #
+
 import asyncio
 import json
 import logging
 
 logger = logging.getLogger(__name__)
 
-async def run_nuclei(target: str) -> list:
+async def run_nuclei(targets: list) -> list:
     """
     Executes Nuclei via Ephemeral Docker Container asynchronously.
-    Optimized for speed: No updates, limited high-value templates, increased concurrency.
+    Accepts a list of URLs (or dicts) and scans all of them in one run.
     """
-    logger.info(f"Initiating OPTIMIZED containerized Nuclei strike on {target}...")
+    extracted_urls = []
+    for t in targets:
+        if isinstance(t, dict) and 'url' in t:
+            extracted_urls.append(t['url'])
+        elif isinstance(t, str):
+            extracted_urls.append(t)
+            
+    target_string = ",".join(extracted_urls)
+    
+    logger.info(f"Initiating OPTIMIZED containerized Nuclei strike on {len(extracted_urls)} targets...")
     
     cmd = [
         "docker", "run", "--rm", 
-        "projectdiscovery/nuclei:latest", 
-        "-u", target, 
+        "reconnator-nuclei:latest",
+        "-u", target_string, 
         "-silent", 
         "-jsonl",
-        "-duc",
-        "-c", "50",
-        "-t", "cves,vulnerabilities,misconfiguration,exposed-panels"
+        "-c", "50", 
     ]
-    
+
     try:
         process = await asyncio.create_subprocess_exec(
             *cmd,

@@ -1,17 +1,21 @@
+# =============================================================================================== #
+# This is the main controller for Telegram chatbot.                                               #
+# This codes act as the "limbs" for Reconnator to work on the chat-based command.                 #
+# It handles Telegram interactions, talks to the AI models, and controls the execution flow.      #
+# It features a Traffic Controller to ensure complex parallel tool calls run orderly.             #
+# Because executing Ffuf before getting the subdomains will leave your AI models such a bad mood. #
+# =============================================================================================== #
+
 import asyncio
 import os
 import logging
+import json
 from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from aiogram.utils.keyboard import InlineKeyboardBuilder
+from aiogram.types import FSInputFile
 
-# Import modul-modul yang sudah kita buat sebelumnya
-from modules.crtsh_fetcher import fetch_subdomains
-from modules.otx_fetcher import fetch_subdomains_otx
-from modules.http_prober import probe_subdomains
-from modules.attack_engine import run_nuclei
+from modules.agent_core import chat_with_cave_sec, mcp_agent
 
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
@@ -20,131 +24,79 @@ bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
 bot = Bot(token=bot_token)
 dp = Dispatcher()
 
-# Global Dictionary untuk menyimpan status lock & task per sesi (chat_id)
-active_sessions = {}
-
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
-    await message.answer("Reconnator standby. Use /scan <target> to begin.")
+    await message.answer("*Reconnator Enabled. Type your prompts to start.*", parse_mode="Markdown")
 
-@dp.message(Command("scan"))
-async def cmd_scan(message: types.Message):
+@dp.message()
+async def handle_user_message(message: types.Message):
     chat_id = message.chat.id
-    
-    # 1. FITUR LOCK & CANCEL
-    if chat_id in active_sessions and active_sessions[chat_id].get('is_running'):
-        builder = InlineKeyboardBuilder()
-        builder.add(InlineKeyboardButton(text="🛑 Stop It", callback_data="cancel_scan"))
-        builder.add(InlineKeyboardButton(text="▶️ Continue", callback_data="continue_scan"))
-        
-        await message.answer(
-            "⚠️ WARNING: Engine is currently engaged.\n\n"
-            "Would you like to continue the scanning process or else just stop it?", 
-            reply_markup=builder.as_markup()
-        )
-        return
+    user_text = message.text
 
-    args = message.text.split()
-    if len(args) < 2:
-        await message.answer("Error: Target missing. Usage: /scan <target>")
-        return
+    ai_response = await chat_with_cave_sec(user_text)
     
-    target = args[1]
-    
-    # Kunci sesi untuk chat ini
-    active_sessions[chat_id] = {'is_running': True, 'target': target}
-    
-    await message.answer(f"Target: {target}\nStatus: Initializing Phase 1 (Recon)...")
-    
-    # 2. FASE RECON (crt.sh / OTX)
-    subdomains = fetch_subdomains(target)
-    if not subdomains:
-        subdomains = fetch_subdomains_otx(target)
-        
-    if not subdomains:
-        await message.answer("Error: No subdomains found. Aborting.")
-        active_sessions[chat_id]['is_running'] = False
-        return
+    if "content" in ai_response and ai_response["content"]:
+        await message.answer(f"`{ai_response['content']}`", parse_mode="Markdown")
 
-    await message.answer(f"Status: Probing {len(subdomains)} targets...")
-    
-    # 3. FASE PROBER
-    probe_results = await probe_subdomains(subdomains)
-    live_targets = probe_results.get('live', [])
-    
-    if not live_targets:
-        await message.answer("Error: No live targets found. Aborting.")
-        active_sessions[chat_id]['is_running'] = False
-        return
+    if "tool_calls" in ai_response:
+        tool_calls = ai_response["tool_calls"]
+        is_complex = len(tool_calls) > 1
 
-    # 4. INTERACTIVE MENU (Milih Senjata)
-    builder = InlineKeyboardBuilder()
-    builder.add(InlineKeyboardButton(text="☢️ Nuclei", callback_data=f"attack_nuclei_{target}"))
-    builder.add(InlineKeyboardButton(text="🗺️ NMap", callback_data=f"attack_nmap_{target}"))
-    builder.add(InlineKeyboardButton(text="📂 Ffuf", callback_data=f"attack_ffuf_{target}"))
-    builder.adjust(3) # Susun 3 tombol sebaris
-    
-    report_text = (
-        f"RECON COMPLETE: {target}\n"
-        f"------------------\n"
-        f"Subdomains Found: {len(subdomains)}\n"
-        f"Live Assets: {len(live_targets)}\n"
-        f"------------------\n"
-        f"Select attack engine for Phase 2:"
-    )
-    
-    await message.answer(report_text, reply_markup=builder.as_markup())
-    # Lepas lock sementera karena prober sudah selesai, nunggu user klik tombol
-    active_sessions[chat_id]['is_running'] = False 
+        tool_priority = {
+            "execute_subdomain_recon": 1,
+            "execute_nmap": 2,
+            "execute_nuclei": 3,
+            "execute_ffuf": 4,
+            "create_pdf_report": 5
+        }
+        
+        tool_calls.sort(key=lambda x: tool_priority.get(x["function"]["name"], 99))
 
-# Nangkep klik tombol
-@dp.callback_query()
-async def handle_callback(callback_query: types.CallbackQuery):
-    chat_id = callback_query.message.chat.id
-    data = callback_query.data
-    
-    await bot.answer_callback_query(callback_query.id)
-    
-    # Handle Cancel Request
-    if data == "cancel_scan":
-        active_sessions[chat_id] = {'is_running': False}
-        await bot.send_message(chat_id, "Status: Scanning process terminated by user.")
-        return
-    elif data == "continue_scan":
-        await bot.send_message(chat_id, "Status: Ignoring interruption. Engine is still running.")
-        return
+        final_results = []
+        pdf_filepath = None
+
+        if is_complex:
+            await message.answer("`[SYS] | Scanning the target with the most complex method possible...`", parse_mode="Markdown")
+
+        for tool_call in tool_calls:
+            func_name = tool_call["function"]["name"]
+            try:
+                args = json.loads(tool_call["function"]["arguments"])
+            except:
+                args = {}
+
+            if func_name == "execute_subdomain_recon":
+                await message.answer("`[SYS] | Running subdomain fetcher...`", parse_mode="Markdown")
+            elif func_name == "create_pdf_report":
+                await message.answer("`[SYS] | Compiling all data into PDF...`", parse_mode="Markdown")
+            else:
+                tool_display = func_name.replace('execute_', '').upper()
+                await message.answer(f"`[SYS] | Running {tool_display}...`", parse_mode="Markdown")
+            
+            result_text = await mcp_agent.execute_mcp_tool(func_name, args)
+            
+            if func_name == "create_pdf_report":
+                if "[SUCCESS]" in result_text:
+                    pdf_filepath = result_text.split("at: ")[-1].strip()
+            else:
+                final_results.append(result_text)
+
+        if final_results:
+            header_text = "**Deep scanning complete**\n\n" if is_complex else "**Scan complete**\n\n"
+            summary = header_text
+            for res in final_results:
+                summary += f"• `{res}`\n\n"
+            await message.answer(summary, parse_mode="Markdown")
         
-    # Handle Attack Engine Selection
-    if data.startswith("attack_"):
-        # Kunci lagi karena proses berat mau jalan
-        active_sessions[chat_id] = {'is_running': True}
-        
-        _, engine, target = data.split('_')
-        
-        await bot.send_message(chat_id, f"Status: Initiating {engine.upper()} strike on {target}...\nPlease wait.")
-        
-        if engine == "nuclei":
-            results = await run_nuclei(target)
-            
-            critical = sum(1 for item in results if item.get('info', {}).get('severity') == 'critical')
-            high = sum(1 for item in results if item.get('info', {}).get('severity') == 'high')
-            
-            await bot.send_message(
-                chat_id, 
-                f"STRIKE COMPLETE: {target}\nEngine: NUCLEI\nFindings: {len(results)}\nCritical: {critical} | High: {high}"
-            )
-            
-        elif engine == "nmap":
-            await bot.send_message(chat_id, "Error: NMap engine not yet integrated.")
-            
-        elif engine == "ffuf":
-            await bot.send_message(chat_id, "Error: Ffuf engine not yet integrated.")
-            
-        # Selesai attack, lepas kunci
-        active_sessions[chat_id]['is_running'] = False
+        if pdf_filepath and os.path.exists(pdf_filepath):
+            try:
+                report_file = FSInputFile(pdf_filepath)
+                await bot.send_document(chat_id, report_file, caption="*SUCCESS* | REPORT ATTACHED")
+            except Exception as e:
+                logging.error(f"Failed to send PDF: {e}")
 
 async def main():
-    print("Bot is running 24/7. Press Ctrl+C to stop.")
+    print("MCP Agentic Reconnator is running 24/7...")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":

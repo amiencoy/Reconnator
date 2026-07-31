@@ -1,0 +1,10 @@
+# ==================================================================================== #
+# This is the Nmap Dockerfile. It builds a minimal Alpine-based container equipped     #
+# with Nmap and its default scripting engine (NSE) files.                              #
+# Running Nmap inside an ephemeral container keeps the host system perfectly clean     #
+# and ensures cross-platform consistency without messy local installations.            #
+# ==================================================================================== #
+
+FROM alpine:latest
+RUN apk add --no-cache nmap nmap-scripts
+ENTRYPOINT ["nmap"]

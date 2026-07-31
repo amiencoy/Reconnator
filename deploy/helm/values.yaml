@@ -1,9 +1,18 @@
+# ==================================================================================== #
+# This is the values.yaml file. The configuration hub for our Helm chart.              #
+# We stripped out the old 'schedule' and 'targetDomain' (goodbye playo.id!) because    #
+# Cave-Sec now runs 24/7 as a Telegram bot and takes targets dynamically via chat.     #
+# We also added the AI block to securely pass the Gemini API key to the agent.         #
+# ==================================================================================== #
+
 image:
   repository: reconnator
-  tag: "v1"
+  tag: "v2"
   pullPolicy: IfNotPresent
-schedule: "0 0 * * *" 
-targetDomain: "playo.id"
+
 telegram:
   botToken: ""
   chatId: ""
+
+ai:
+  geminiApiKey: ""

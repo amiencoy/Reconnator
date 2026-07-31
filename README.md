@@ -1,59 +1,70 @@
-# Reconnator: Cloud-Native DevSecOps ChatOps Bot
+---
+# Reconnator 2.0: The Cave-Sec AI Agent
 
-**Reconnator** is a lightweight, cloud-native reconnaissance bot designed for modern bug hunters and security engineers. Transitioning from a passive script to a fully interactive DevSecOps assistant, it orchestrates vulnerability scanning and seamlessly integrates into modern infrastructure (Docker/Kubernetes).
+**Reconnator** has evolved. What started as a simple, scheduled passive reconnaissance script is now a fully interactive, AI-driven DevSecOps assistant. Powered by Google Gemini and the Model Context Protocol (MCP), Reconnator operates as a Telegram bot with a highly efficient, somewhat brutal AI persona. 
 
-Unlike traditional scripts, Reconnator is built with resilience in mind, featuring built-in retry mechanisms, an interactive ChatOps wizard, and a fully containerized attack architecture.
+It orchestrates vulnerability scanning, dynamically routes tools, and seamlessly integrates into modern infrastructure (Docker/Kubernetes) using a container-native attack architecture.
 
-## Key Features & v1.0.1 Updates
-
-- **Interactive ChatOps Wizard (v1.0.1)**: Operates as a 24/7 daemon using `aiogram` with a Telegram Inline Keyboard UI for weapon selection and scan management.
-- **Ephemeral Docker Workers (v1.0.1)**: Attack engines (like Nuclei) are executed inside disposable Docker containers (`--rm`) to prevent dependency conflicts and ensure a clean execution environment.
-- **Session Lock & Anti-Exhaustion (v1.0.1)**: Built-in locking mechanism to prevent server resource exhaustion from concurrent scan requests, complete with user cancellation options.
-- **Automated Subdomain & Live Asset Probing**: Fetches transparent certificate logs via `crt.sh` and OTX, immediately filtering for live HTTP assets before launching a strike.
-- **Resilient Engine**: Built-in timeout handling and automatic retries to bypass API gateway errors (HTTP 502/503/504).
 ---
 
-## Quick Start
+### A Quick Note on the Codebase
+*If you dive into the `src/` folder, you might notice something intense. I've added massive, obnoxious `# ==================== #` comment banners to the top of **literally every single file** (Python, Dockerfiles, YAMLs, you name it) so  you (and I) don't get lost in the sauce.*
 
-You can run Reconnator in different ways depending on your environment.
+---
 
-### Option 1: Running Locally (Daemon Mode)
+## Key Features (v2.0.0 Architecture)
 
-Ensure you have Python 3.10+ installed and Docker Engine running in the background for the attack modules.
+- 🧠 **AI Brain (Gemini + MCP):** No more rigid menus, just chat with the bot natively. The AI understands your intent, dynamically fetches tools from the MCP Server, and executes complex recon pipelines based on conversational context.
+- 🐳 **Ephemeral Docker Workers (DooD):** Attack engines (Nmap, Ffuf, Nuclei, Subfinder) are executed asynchronously inside disposable Docker containers (`--rm`). This prevents dependency hell and keeps the host system squeaky clean.
+- 📄 **PDF Reporting:** Automatically compiles raw JSON scan data into a clean, professional PDF report (using the Roboto font) sent directly to your Telegram chat.
+- ☸️ **Always-On Kubernetes Daemon:** Transitioned from a legacy CronJob to a 24/7 Kubernetes `Deployment` using Docker-out-of-Docker (DooD) socket mounting for enterprise-grade scalability.
+- 🛡️ **Resilient Tooling:** Built-in fallbacks (e.g., if Subfinder fails, Cave-Sec automatically queries AlienVault OTX) and automated template baking for tools like Nuclei.
+
+---
+
+## 🚀 Quick Start
+
+Ensure you have Python 3.11+ installed and the **Docker Engine** running on your host (Reconnator needs access to the Docker daemon to spawn its tools' containers).
+
+### Option 1: Running Locally (Docker-out-of-Docker)
 
 ```bash
 # Clone the repository
 git clone [https://github.com/yourusername/reconnator.git](https://github.com/yourusername/reconnator.git)
 cd reconnator
 
-# Setup Virtual Environment
-python3 -m venv venv
-source venv/bin/activate
+# Setup Environment Variables (Rename the example file)
+cp .env.example .env
 
-# Install Dependencies
-pip install -r requirements.txt
+# Edit .env and add your TELEGRAM_BOT_TOKEN and GEMINI_API_KEY
+nano .env
 
-# Setup Environment Variables
-export TELEGRAM_BOT_TOKEN="your_bot_token"
+# Build the main Reconnator bot image
+docker build -t reconnator:v2 .
 
-# Run the Bot 24/7
-python src/bot.py
+# Run the Bot 24/7 (CRITICAL: Mount the docker.sock!)
+docker run -d \
+  --name reconnator-bot \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  --env-file .env \
+  reconnator:v2
 
 ```
 
-*Once running, open your Telegram bot and type `/scan <target.com>` to trigger the interactive menu.*
+*Once running, open your Telegram bot and simply say: "scan on example.com with nmap, ffuf and nuclei"*
 
-### Option 2: Kubernetes & Helm (Continuous Recon - Legacy Mode)
+### Option 2: Kubernetes & Helm
 
-Deploy Reconnator as a scheduled CronJob in your Kubernetes cluster (e.g., K3s, Minikube, or EKS/GKE).
+Deploy Reconnator in your Kubernetes cluster (e.g., K3s, Minikube, EKS). *Note: Ensure your node's runtime supports Docker sockets.*
 
 ```bash
 # Navigate to the Helm directory
 cd deploy/helm
 
-# Install the chart (Runs daily by default)
-helm install recon-bot . --set targetDomain="example.com" \
-  --set telegram.botToken="your_bot_token"
+# Install the chart and inject secrets dynamically
+helm install recon-bot . \
+  --set telegram.botToken="YOUR_TELEGRAM_TOKEN" \
+  --set ai.geminiApiKey="YOUR_GEMINI_API_KEY"
 
 ```
 
@@ -63,34 +74,45 @@ helm install recon-bot . --set targetDomain="example.com" \
 
 ```text
 .
-├── .github/workflows/    # CI/CD pipelines
-├── deploy/helm/          # Kubernetes Helm Chart
-├── src/                  # Core Python modules
-│   ├── modules/          # Fetchers, HTTP Prober, and Attack Engines
-│   ├── utils/            # Loggers
-│   ├── main.py           # Legacy CLI Entrypoint
-│   └── bot.py            # ChatOps Daemon Entrypoint (v1.0.1)
-├── Dockerfile            # Alpine-based container blueprint
-└── requirements.txt      # Python dependencies
+├── .github/workflows/    # CI/CD pipelines (Auto GHCR publishing)
+├── deploy/helm/          # Kubernetes Helm Chart (Deployment + DooD)
+├── src/                  # Core Application
+│   ├── modules/          # Ephemeral Engines (nmap, ffuf, nuclei, subfinder, otx, report)
+│   ├── agent_core.py     # The AI Brain: Gemini routing & Cave-Sec persona
+│   ├── mcp_server.py     # The Arsenal: MCP tool registration & schema mapping
+│   └── bot.py            # The Mouth & Ears: Telegram ChatOps entrypoint
+├── Dockerfile            # Main Alpine-based bot container
+├── Dockerfile.ffuf       # Custom multi-stage build for Ffuf + SecLists
+├── Dockerfile.nmap       # Minimal Nmap + NSE container
+├── Dockerfile.nuclei     # Nuclei container with pre-baked vulnerability templates
+├── .env.example          # Environment variable blueprint
+└── requirements.txt      # Python dependencies (aiogram, fastmcp, httpx)
 
 ```
 
-## Roadmap
+---
 
-* NMap integration for non-HTTP port mapping.
-* Ffuf integration for deep directory fuzzing.
-* **Layer 3 AI Analysis:** AI-powered alert filtering to reduce false positives.
-* Automated report generation (PDF, JSON, HTML).
+## 🗺️ Roadmap
+
+* [x] Integrate Nmap for deep port & service mapping.
+* [x] Integrate Ffuf with baked-in SecLists for directory fuzzing.
+* [x] **Layer 3 AI Analysis:** Implement Gemini and MCP to orchestrate the pipeline natively.
+* [x] Automated report generation (PDF output).
+* [ ] Implement multi-target parallel scanning capabilities.
+* [ ] Add continuous monitoring diffs (alerting only on *new* vulnerabilities).
+
+---
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
+Contributions, issues, and feature requests are very welcome. If you want to expand the MCP toolset, check out `mcp_server.py` and drop a PR.
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
+
 
 <p align="center">
   <i><small>Built with code and coffee by amiencoy</small></i>

@@ -1,4 +1,27 @@
-# Reconnator 2.0: The AI Powered Reconnaisance Tools
+<div align="center">
+
+<pre>
+        /\                 /\
+       / \'._   (\_/)   _.'/ \
+      /_.''._'--('o')--'_.''._\
+      | \_ / `;=/ " \=;` \ _/ |
+       \/ `\__|`\___/`|__/`  \/
+
+ _____                                      _             
+|  __ \                                    | |            
+| |__) |___  ___ ___  _ __  _ __   __ _| |_| | ___  _ __  
+|  _  // _ \/ __/ _ \| '_ \| '_ \ / _` | __| |/ _ \| '__| 
+| | \ \  __/ (_| (_) | | | | | | | (_| | |_| | (_) | |    
+|_|  \_\___|\___\___/|_| |_|_| |_|\__,_|\__|_|\___/|_|    
+
+     AI-Powered DevSecOps Reconnaissance Tool
+</pre>
+
+</div>
+
+
+
+# Reconnator 2.0: The AI Powered Reconnaisance Tool
 
 **Reconnator** has evolved. What started as a simple, scheduled passive reconnaissance script is now a fully interactive, AI-driven Reconnaisance assistant. Powered by Google Gemini and the Model Context Protocol (MCP), Reconnator operates as a Telegram bot with a highly efficient, somewhat brutal AI persona. 
 

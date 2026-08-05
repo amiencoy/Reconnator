@@ -26,7 +26,7 @@ It orchestrates vulnerability scanning, dynamically routes tools, and seamlessly
 
 - 🧠 **AI Brain (Gemini + MCP):** No more rigid menus, just chat with the bot natively. The AI understands your intent, dynamically fetches tools from the MCP Server, and executes complex recon pipelines based on conversational context.
 - 🐳 **Ephemeral Docker Workers (DooD):** Attack engines (Nmap, Ffuf, Nuclei, Subfinder) are executed asynchronously inside disposable Docker containers (`--rm`). This prevents dependency hell and keeps the host system squeaky clean.
-- 📄 **PDF Reporting:** Automatically compiles raw JSON scan data into a clean, professional PDF report (using the Roboto font) sent directly to your Telegram chat.
+- 📄 **PDF Reporting:** Automatically compiles raw JSON scan data into a clean, professional PDF report sent directly to your Telegram chat.
 - ☸️ **Always-On Kubernetes Daemon:** Transitioned from a legacy CronJob to a 24/7 Kubernetes `Deployment` using Docker-out-of-Docker (DooD) socket mounting for enterprise-grade scalability.
 - 🛡️ **Resilient Tooling:** Built-in fallbacks (e.g., if Subfinder fails, automatically queries AlienVault OTX) and automated template baking for tools like Nuclei.
 

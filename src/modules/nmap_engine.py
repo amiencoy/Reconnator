@@ -12,10 +12,10 @@ import xml.etree.ElementTree as ET
 
 logger = logging.getLogger(__name__)
 
-async def run_nmap(targets: list, scan_mode: str = "default") -> dict:
+async def run_nmap(targets: list, scan_mode: str = "default") -> str:
     """
     Executes Nmap network scanner inside a Docker container.
-    Accepts a list of targets and returns a dictionary of discovered open ports and services.
+    Accepts a list of targets and returns a formatted string of discovered open ports and services.
     Modes: "quick" (top 100 ports), "default", "deep" (all ports + default scripts).
     """
     clean_targets = set()
@@ -53,7 +53,7 @@ async def run_nmap(targets: list, scan_mode: str = "default") -> dict:
         
         if process.returncode != 0 and not stdout:
             logger.warning(f"Nmap stderr: {stderr.decode().strip()}")
-            return {}
+            return ""
 
         results = {}
         try:
@@ -85,8 +85,19 @@ async def run_nmap(targets: list, scan_mode: str = "default") -> dict:
             logger.error("Failed to parse XML output from Nmap.")
             
         logger.info(f"Nmap scan complete. Found open ports on {len(results)} hosts.")
-        return results
+
+        if not results:
+            return ""
+            
+        formatted_output = "NMAP Open Ports Discovery:\n"
+        for host, ports in results.items():
+            formatted_output += f"Host: {host}\n"
+            for port in ports:
+                formatted_output += f"  > Port {port}\n"
+            formatted_output += "\n"
+            
+        return formatted_output.strip()
 
     except Exception as e:
         logger.error(f"Failed to execute containerized Nmap: {e}")
-        return {}
+        return ""

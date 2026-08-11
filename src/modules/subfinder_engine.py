@@ -1,10 +1,9 @@
-# ==================================================================================== #
-# This is the Subfinder engine module. The first scout in our reconnaissance pipeline. #
-# It runs asynchronously inside an ephemeral Docker container to harvest subdomains.   #
-# The function run_subfinder will be called from the mcp_server.py module.             #
-# Note: If Subfinder fails (e.g., crt.sh timeout), the MCP server will automatically   #
-# fallback to the AlienVault OTX fetcher to ensure we don't walk away empty-handed.    #
-# ==================================================================================== #
+# ==================================================================================================================================================================== #
+# This is the Subfinder engine module. The first scout in our reconnaissance pipeline.                                                                                 #
+# It runs asynchronously inside an ephemeral Docker container to harvest subdomains.                                                                                   #
+# The function run_subfinder will be called from the mcp_server.py module.                                                                                             #
+# Note: If Subfinder fails (e.g., crt.sh timeout), the MCP server will automatically fallback to the AlienVault OTX fetcher to ensure we don't walk away empty-handed. #
+# ==================================================================================================================================================================== #
 
 import asyncio
 import logging

@@ -25,7 +25,7 @@ async def run_nuclei(targets: list) -> list:
             
     target_string = ",".join(extracted_urls)
     
-    logger.info(f"Initiating OPTIMIZED containerized Nuclei strike on {len(extracted_urls)} targets...")
+    logger.info(f"Initiating containerized Nuclei strike on {len(extracted_urls)} targets...")
     
     cmd = [
         "docker", "run", "--rm", 

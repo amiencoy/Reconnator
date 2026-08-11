@@ -26,7 +26,6 @@ async def generate_scan_report(scan_memory: dict, format_type: str = "pdf") -> s
     os.makedirs("generated_reports", exist_ok=True)
     filename = f"generated_reports/Reconnator_Report_{report_id}.pdf"
     
-    # Inisialisasi dokumen ReportLab
     doc = SimpleDocTemplate(
         filename, 
         pagesize=letter, 
@@ -39,13 +38,12 @@ async def generate_scan_report(scan_memory: dict, format_type: str = "pdf") -> s
     
     styles = getSampleStyleSheet()
     
-    # Styling khusus laporan
     title_style = ParagraphStyle(
         'ReportTitle',
         parent=styles['Heading1'],
         fontSize=16,
         textColor=colors.HexColor("#C80000"),
-        alignment=1, # Center
+        alignment=1,
         spaceAfter=10
     )
     
@@ -74,6 +72,15 @@ async def generate_scan_report(scan_memory: dict, format_type: str = "pdf") -> s
         fontSize=11,
         fontName="Helvetica-Bold",
         backColor=colors.HexColor("#E6E6E6")
+    )
+
+    raw_text_style = ParagraphStyle(
+        'RawText',
+        parent=styles['Normal'],
+        fontSize=8,
+        fontName="Courier",
+        textColor=colors.black,
+        leading=10
     )
 
     story.append(Paragraph("RECONNATOR VULNERABILITY REPORT", title_style))
@@ -113,42 +120,53 @@ async def generate_scan_report(scan_memory: dict, format_type: str = "pdf") -> s
 
         story.append(Paragraph(f" TARGET DATA: {target_key.upper()} ", section_style))
         story.append(Spacer(1, 5))
-
         if isinstance(vulnerabilities, list) and len(vulnerabilities) > 0:
             for item in vulnerabilities:
-                info = item.get("info", {})
-                vuln_name = info.get("name", "Unknown Vulnerability")
-                severity = info.get("severity", "INFO").upper()
-                target_url = item.get("url", item.get("host", "Unknown Host"))
+                if isinstance(item, dict):
+                    info = item.get("info", {})
+                    vuln_name = info.get("name", "Unknown Vulnerability")
+                    severity = info.get("severity", "INFO").upper()
+                    target_url = item.get("url", item.get("host", "Unknown Host"))
 
-                color_map = {
-                    "CRITICAL": "#C80000",
-                    "HIGH": "#C80000",
-                    "MEDIUM": "#C86400",
-                    "LOW": "#0EFF22",
-                    "INFO": "#0064C8"
-                }
-                sev_color = color_map.get(severity, "#0064C8")
-                
-                vuln_style = ParagraphStyle(
-                    'VulnTitle',
-                    parent=body_style,
-                    fontSize=10,
-                    fontName="Helvetica-Bold",
-                    textColor=colors.HexColor(sev_color)
-                )
-                
-                story.append(Paragraph(f"<b>[{severity}]</b> {vuln_name}", vuln_style))
-                story.append(Paragraph(f"<b>Endpoint :</b> {target_url}", body_style))
-                
-                refs = info.get("reference", [])
-                if refs:
-                    story.append(Paragraph(f"<b>Reference:</b> {refs[0]}", body_style))
-                
-                story.append(Spacer(1, 4))
-                story.append(HRFlowable(width="100%", thickness=0.5, color=colors.HexColor("#CCCCCC"), spaceAfter=6))
+                    color_map = {
+                        "CRITICAL": "#C80000",
+                        "HIGH": "#C80000",
+                        "MEDIUM": "#C86400",
+                        "LOW": "#0EFF22",
+                        "INFO": "#0064C8"
+                    }
+                    sev_color = color_map.get(severity, "#0064C8")
+                    
+                    vuln_style = ParagraphStyle(
+                        'VulnTitle',
+                        parent=body_style,
+                        fontSize=10,
+                        fontName="Helvetica-Bold",
+                        textColor=colors.HexColor(sev_color)
+                    )
+                    
+                    story.append(Paragraph(f"<b>[{severity}]</b> {vuln_name}", vuln_style))
+                    story.append(Paragraph(f"<b>Endpoint :</b> {target_url}", body_style))
+                    
+                    refs = info.get("reference", [])
+                    if refs:
+                        story.append(Paragraph(f"<b>Reference:</b> {refs[0]}", body_style))
+                    
+                    story.append(Spacer(1, 4))
+                    story.append(HRFlowable(width="100%", thickness=0.5, color=colors.HexColor("#CCCCCC"), spaceAfter=6))
+
+                elif isinstance(item, str):
+                    safe_item = item.replace('<', '&lt;').replace('>', '&gt;')
+                    story.append(Paragraph(safe_item, raw_text_style))
+            
+            story.append(Spacer(1, 10))
+
+        elif isinstance(vulnerabilities, str) and vulnerabilities.strip():
+            safe_text = vulnerabilities.replace('<', '&lt;').replace('>', '&gt;').replace('\n', '<br/>')
+            story.append(Paragraph(safe_text, raw_text_style))
+            story.append(Spacer(1, 10))
         else:
-            story.append(Paragraph("<i>No active vulnerabilities found or parsing format unsupported.</i>", body_style))
+            story.append(Paragraph("<i>No vulnerabilities detected or tool returned empty result.</i>", body_style))
             story.append(Spacer(1, 10))
 
     doc.build(story)

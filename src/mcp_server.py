@@ -9,6 +9,7 @@
 import os
 import json
 import logging
+import time
 from fastmcp import FastMCP
 from modules.nmap_engine import run_nmap
 from modules.ffuf_engine import run_ffuf
@@ -23,12 +24,19 @@ logger = logging.getLogger(__name__)
 mcp = FastMCP("ReconnatorCore")
 scan_memory = {}
 
+def mark_scan_start():
+    if "_metadata" not in scan_memory:
+        scan_memory["_metadata"] = {}
+    if "start_time" not in scan_memory["_metadata"]:
+        scan_memory["_metadata"]["start_time"] = time.time()
+
 @mcp.tool()
 async def execute_subdomain_recon(domain: str) -> str:
     """
     Perform subdomain enumeration on a target domain and filter for active ones.
     Uses Subfinder (and OTX as fallback) followed by dnsx to ensure targets are alive.
     """
+    mark_scan_start()
     try:
         raw_subdomains = await run_subfinder(domain)
         if not raw_subdomains:
@@ -56,6 +64,7 @@ async def execute_nmap(target: str, mode: str = "default") -> str:
     Run Nmap port scanner on a specified target.
     Modes available: 'quick', 'default', 'deep'.
     """
+    mark_scan_start()
     try:
         results = await run_nmap([target], mode)
         scan_memory[f"nmap_{target}"] = results
@@ -70,6 +79,7 @@ async def execute_ffuf(target: str, mode: str = "deep") -> str:
     Run Ffuf directory fuzzer on a specified target.
     Always prefer 'deep' mode for recursive fuzzing.
     """
+    mark_scan_start()
     try:
         results = await run_ffuf([target], mode)
         scan_memory[f"ffuf_{target}"] = results
@@ -83,6 +93,7 @@ async def execute_nuclei(target: str) -> str:
     """
     Run Nuclei vulnerability scanner on a specified target.
     """
+    mark_scan_start()
     try:
         results = await run_nuclei([target])
         scan_memory[f"nuclei_{target}"] = results
@@ -101,11 +112,26 @@ async def create_pdf_report() -> str:
         return "[FAILED] No scan data in memory. Run a scan first."
     
     try:
+        start_time = scan_memory.get("_metadata", {}).get("start_time", time.time())
+        end_time = time.time()
+        
+        duration_seconds = int(end_time - start_time)
+        minutes, seconds = divmod(duration_seconds, 60)
+        formatted_duration = f"{minutes}m {seconds}s" if minutes > 0 else f"{seconds}s"
+        
+        if "_metadata" not in scan_memory:
+            scan_memory["_metadata"] = {}
+            
+        scan_memory["_metadata"]["duration"] = formatted_duration
+
         filepath = await generate_scan_report(scan_memory, "pdf")
+        
         if filepath:
             scan_memory.clear()
             return f"[SUCCESS] PDF Report successfully generated at: {filepath}"
+            
         return "[ERROR] Report generation returned no file."
+        
     except Exception as e:
         logger.error(f"Report Error: {e}")
         return f"[ERROR] Failed to generate PDF report: {str(e)}"

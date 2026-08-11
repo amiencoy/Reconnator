@@ -2,7 +2,7 @@
 # This is the Ffuf engine module. The aggressive directory fuzzer of the pipeline.     #
 # It blindly brute-forces web servers to find hidden endpoints and secret files.       #
 # Running it inside a disposable Docker container keeps our host machine sterile.      #
-# Good thing we have dnsx now, so this engine won't waste time fuzzing dead servers!   #
+# Good thing we have dnsx now, so this engine won't waste time fuzzing dead servers.   #
 # ==================================================================================== #
 
 import asyncio
@@ -11,9 +11,9 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-async def run_ffuf(targets: list, scan_mode: str = "default") -> dict:
+async def run_ffuf(targets: list, scan_mode: str = "default") -> str:
     """
-    Menjalankan FFUF (Fuzz Faster U Fool) di dalam Docker untuk menebak direktori rahasia.
+    Running FFUF (Fuzz Faster U Fool) inside the Docker Container to find the hidden directories.
     """
     wordlist = "/wordlists/deep.txt" if scan_mode == "deep" else "/wordlists/quick.txt"
     
@@ -35,7 +35,8 @@ async def run_ffuf(targets: list, scan_mode: str = "default") -> dict:
             "-u", fuzz_url,
             "-t", "50",
             "-mc", "200,204,301,302,307,401,403,500",
-            "-of", "json",      
+            "-ac",
+            "-of", "json",
             "-o", "/dev/stdout",
             "-s"
         ]
@@ -66,15 +67,24 @@ async def run_ffuf(targets: list, scan_mode: str = "default") -> dict:
                                 'length': result.get('length', 0)
                             })
                     else:
-                        logger.warning("Tidak ditemukan format JSON pada output FFUF.")
+                        logger.warning("Couldn't find JSON output on FFUF.")
                         
                 except json.JSONDecodeError:
-                    logger.error(f"Gagal memparsing JSON FFUF. Raw output: {raw_output[:100]}")
+                    logger.error(f"Couldn't parse the JSON output. Raw output: {raw_output[:100]}")
                     
             if findings:
                 all_findings[target] = findings
                 
         except Exception as e:
             logger.error(f"Failed to execute containerized FFUF on {target}: {e}")
-            
-    return all_findings
+    if not all_findings:
+        return ""
+        
+    formatted_output = "FFUF Discovered Endpoints:\n"
+    for t_url, endpoints in all_findings.items():
+        formatted_output += f"Target: {t_url}\n"
+        for ep in endpoints:
+            formatted_output += f"  > /{ep['endpoint']}  [Status: {ep['status']} | Size: {ep['length']} bytes]\n"
+        formatted_output += "\n"
+        
+    return formatted_output.strip()

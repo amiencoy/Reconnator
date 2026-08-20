@@ -3,7 +3,7 @@
 # It exposes all our security engines as callable tools for the AI agent.            #
 # I've also wired up the new subdomain recon pipeline here.                          #
 # The flow goes: Subfinder -> OTX (fallback) -> dnsx (to kill the ghost subdomains). #
-# Because feeding dead servers to Nuclei is a crime against compute resources....    #
+# Because feeding dead servers to Nuclei is a crime against compute resources.       #
 # ================================================================================== #
 
 import os

@@ -1,6 +1,6 @@
 # ==================================================================================== #
 # This is the Deployment manifest for Reconnator. We replaced the old CronJob because  #
-# Cave-Sec is now an always-on Telegram bot, not a one-off run-and-die script.         #
+# Reconnator is now an always-on Telegram bot, not a one-off run-and-die script.       #
 # CRITICAL: We mount the host's docker.sock so the pod can spawn our ephemeral         #
 # containers (Nmap, Nuclei, etc.) using the Docker-out-of-Docker (DooD) technique.     #
 # Note: Ensure your Kubernetes nodes (e.g., k3s) have Docker installed and accessible. #

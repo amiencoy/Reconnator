@@ -1,9 +1,8 @@
-# ==================================================================================== #
-# This is the Nuclei Dockerfile. It uses the official ProjectDiscovery image as a base #
-# but forcefully updates the engine and bakes the latest vulnerability templates       #
-# directly into the image layers. This ensures our ephemeral containers can start      #
-# blasting immediately without wasting time downloading templates on every run.        #
-# ==================================================================================== #
+# ==================================================================================================================================== #
+# This is the Nuclei Dockerfile. It uses the official ProjectDiscovery image as a base                                                 #
+# but forcefully updates the engine and bakes the latest vulnerability templates directly into the image layers.                       #
+# This ensures our ephemeral containers can start blasting immediately without wasting time downloading templates on every run.        #
+# ==================================================================================================================================== #
 
 FROM projectdiscovery/nuclei:latest
 RUN nuclei -update-templates

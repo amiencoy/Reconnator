@@ -3,7 +3,7 @@
 # Subfinder and OTX are great, but they often give us a lot of ghost subdomains.     #
 # Feeding dead targets to Nuclei is a huge waste of time and server resources.       #
 # So, dnsx will knock on their doors and only let the alive ones pass through.       #
-# Gotta keep the pipeline lean, fast, and... a little bit mean, I guess.             #
+# Gotta keep the pipeline lean, fast, and also a little bit mean, I guess.           #
 # ================================================================================== #
 
 import asyncio

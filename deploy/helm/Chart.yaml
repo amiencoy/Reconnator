@@ -1,7 +1,7 @@
 # ==================================================================================== #
 # This is the Chart.yaml file. The metadata heart of our Kubernetes Helm deployment.   #
 # We've updated the description to reflect Reconnator's massive evolution from a       #
-# simple CLI script into an AI-driven, MCP-powered DevSecOps agent (Cave-Sec).         #
+# simple CLI script into an AI-driven, MCP-powered Reconnaisance Agent.                #
 # ==================================================================================== #
 
 apiVersion: v2

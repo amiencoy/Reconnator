@@ -127,7 +127,9 @@ Sponsorship supports the project's open-source development and does not include 
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+Reconnator is dual-licensed under either the [MIT License](LICENSE-MIT) or the [Apache License 2.0](LICENSE-APACHE), at your option. See [LICENSE](LICENSE) for the dual-license declaration.
+
+SPDX license expression: `MIT OR Apache-2.0`.
 
 ---
 

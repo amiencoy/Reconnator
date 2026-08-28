@@ -32,6 +32,21 @@ It orchestrates vulnerability scanning, dynamically routes tools, and seamlessly
 
 ---
 
+## 📚 Documentation
+
+The complete operational and development documentation is available in the
+[Reconnator Wiki](https://github.com/amiencoy/Reconnator/wiki).
+
+Start with:
+
+- [Getting Started](https://github.com/amiencoy/Reconnator/wiki/Getting-Started)
+- [Architecture Overview](https://github.com/amiencoy/Reconnator/wiki/Architecture-Overview)
+- [Deployment](https://github.com/amiencoy/Reconnator/wiki/Deployment)
+- [Security and Responsible Use](https://github.com/amiencoy/Reconnator/wiki/Security-and-Responsible-Use)
+- [Troubleshooting](https://github.com/amiencoy/Reconnator/wiki/Troubleshooting)
+
+---
+
 ## Quick Start
 
 Ensure you have Python 3.11+ installed and the **Docker Engine** running on your host (Reconnator needs access to the Docker daemon to spawn its tools' containers).

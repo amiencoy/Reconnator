@@ -81,8 +81,7 @@ appointed role.
 If you experience or witness behavior that may violate this Code of Conduct,
 report it privately to the project maintainer:
 
-> **TODO before announcing open contributions:** Replace this line with a private
-> reporting email address.
+Email the project maintainer at [mamien131@gmail.com](mailto:mamien131@gmail.com).
 
 Do not report sensitive conduct incidents through a public GitHub issue.
 

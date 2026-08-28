@@ -117,6 +117,14 @@ helm install recon-bot . \
 
 Contributions, issues, and feature requests are very welcome. If you want to expand the MCP toolset, check out `mcp_server.py` and drop a PR.
 
+## 💖 Support Reconnator
+
+Reconnator is developed and maintained as an open-source project. Sponsorships help support ongoing maintenance, security-tool integrations, testing, documentation, and future releases.
+
+[![Sponsor on GitHub](https://img.shields.io/badge/Sponsor-GitHub%20Sponsors-ea4aaa?logo=githubsponsors)](https://github.com/sponsors/amiencoy)
+
+Sponsorship supports the project's open-source development and does not include guaranteed support, service-level agreements, custom integrations, or consulting. Commercial deployment and engineering services are handled separately through Draxis Digital.
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.

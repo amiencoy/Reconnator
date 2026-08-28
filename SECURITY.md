@@ -2,16 +2,15 @@
 
 ## Supported Versions
 
-Reconnator is currently developed from the `main` branch and does not yet
-publish a stable, versioned release series.
+Security fixes are provided for the latest patch release in the current minor
+series. The `main` branch contains unreleased development and is not considered
+a stable release.
 
 | Version | Supported |
 | --- | --- |
-| Latest commit on `main` | Yes |
-| Older commits and snapshots | No |
-| Pre-2.0 architecture | No |
-
-This table will be updated when versioned releases are introduced.
+| 2.0.x | Yes |
+| `main` (unreleased development) | No |
+| < 2.0 | No |
 
 ## Reporting a Vulnerability
 

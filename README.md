@@ -2,7 +2,7 @@
   <img src="assets/reconnator-banner.jpeg" alt="ReconnatoR" width="972">
 </p>
 
-# Reconnator 2.0: The AI Powered Reconnaisance Tool
+# Reconnator 2.0.1: The AI Powered Reconnaisance Tool
 
 **Reconnator** has evolved. What started as a simple, scheduled passive reconnaissance script is now a fully interactive, AI-driven Reconnaisance assistant. Powered by Google Gemini and the Model Context Protocol (MCP), Reconnator operates as a Telegram bot with a highly efficient, somewhat brutal AI persona. 
 
@@ -15,7 +15,7 @@ It orchestrates vulnerability scanning, dynamically routes tools, and seamlessly
 
 ---
 
-## Key Features (v2.0.0 Architecture)
+## Key Features (v2.x Architecture)
 
 - 🧠 **AI Brain (Gemini + MCP):** No more rigid menus, just chat with the bot natively. The AI understands your intent, dynamically fetches tools from the MCP Server, and executes complex recon pipelines based on conversational context.
 - 🐳 **Ephemeral Docker Workers (DooD):** Attack engines (Nmap, Ffuf, Nuclei, Subfinder) are executed asynchronously inside disposable Docker containers (`--rm`). This prevents dependency hell and keeps the host system squeaky clean.
@@ -137,6 +137,12 @@ Reconnator is developed and maintained as an open-source project. Sponsorships h
 [![Sponsor on GitHub](https://img.shields.io/badge/Sponsor-GitHub%20Sponsors-ea4aaa?logo=githubsponsors)](https://github.com/sponsors/amiencoy)
 
 Sponsorship supports the project's open-source development and does not include guaranteed support, service-level agreements, custom integrations, or consulting. Commercial deployment and engineering services are handled separately through Draxis Digital.
+
+## 📦 Releases and Versioning
+
+Reconnator follows [Semantic Versioning](https://semver.org/). The current
+release is **v2.0.1**. See the [GitHub Releases](https://github.com/amiencoy/Reconnator/releases),
+[Changelog](CHANGELOG.md), and [Release Guide](RELEASING.md) for details.
 
 ## 📄 License
 

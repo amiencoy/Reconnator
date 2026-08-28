@@ -1,6 +1,6 @@
 # ==================================================================================== #
 # GitHub Actions Workflow for Reconnator: Automated Docker Image Publish.              #
-# This pipeline runs on every push to the 'main' branch or when manually triggered.    #
+# This pipeline runs on relevant main changes, SemVer tags, or manual dispatch.        #
 # It builds the Reconnator image and publishes it to GitHub Container Registry (ghcr). #
 # Note: Ensure you have granted the repository permissions to write to packages.       #
 # ==================================================================================== #
@@ -11,6 +11,8 @@ on:
   push:
     branches:
       - 'main'
+    tags:
+      - 'v*.*.*'
     paths:
       - 'src/**'
       - 'Dockerfile'
@@ -45,7 +47,12 @@ jobs:
         uses: docker/metadata-action@v6
         with:
           images: ghcr.io/${{ github.repository }}
+          flavor: |
+            latest=auto
           tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
             type=sha,format=short
             type=raw,value=latest,enable={{is_default_branch}}
 

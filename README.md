@@ -1,14 +1,7 @@
-```ascii
+<p align="center">
+  <img src="assets/reconnator-banner.jpeg" alt="ReconnatoR" width="972">
+</p>
 
-░█████████                                                                       ░██                ░█████████
-░██     ░██                                                                      ░██               ░██     ░██
-░██     ░██  ░███████   ░███████   ░███████  ░████████  ░████████   ░██████   ░████████  ░███████  ░██     ░██
-░█████████  ░██    ░██ ░██    ░██ ░██    ░██ ░██    ░██ ░██    ░██       ░██     ░██    ░██    ░██  ░█████████
-░██   ░██   ░█████████ ░██        ░██    ░██ ░██    ░██ ░██    ░██  ░███████     ░██    ░██    ░██    ░██  ░██
-░██    ░██  ░██        ░██    ░██ ░██    ░██ ░██    ░██ ░██    ░██ ░██   ░██     ░██    ░██    ░██   ░██   ░██
-░██     ░██  ░███████   ░███████   ░███████  ░██    ░██ ░██    ░██  ░█████░██    ░████  ░███████    ░██    ░██
-
-```
 # Reconnator 2.0: The AI Powered Reconnaisance Tool
 
 **Reconnator** has evolved. What started as a simple, scheduled passive reconnaissance script is now a fully interactive, AI-driven Reconnaisance assistant. Powered by Google Gemini and the Model Context Protocol (MCP), Reconnator operates as a Telegram bot with a highly efficient, somewhat brutal AI persona. 

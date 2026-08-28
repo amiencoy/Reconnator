@@ -1,0 +1,89 @@
+name: Scanner or tool integration
+description: Propose a new authorized reconnaissance or security-tool integration
+title: "[Integration]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Reconnator integrations must have a clear reconnaissance or defensive
+        security purpose, support containerized execution where practical, and
+        preserve explicit authorization boundaries.
+
+  - type: input
+    id: tool_name
+    attributes:
+      label: Tool name
+      placeholder: "Example: httpx"
+    validations:
+      required: true
+
+  - type: input
+    id: upstream
+    attributes:
+      label: Official upstream URL
+      placeholder: "https://github.com/owner/project"
+    validations:
+      required: true
+
+  - type: input
+    id: license
+    attributes:
+      label: Upstream license
+      description: Provide the SPDX identifier or upstream license name.
+      placeholder: "Example: MIT"
+    validations:
+      required: true
+
+  - type: textarea
+    id: capability
+    attributes:
+      label: Capability and use case
+      description: What does the tool add that existing integrations do not?
+    validations:
+      required: true
+
+  - type: textarea
+    id: interface
+    attributes:
+      label: Inputs and outputs
+      description: Describe expected MCP parameters, command arguments, output format, and report fields.
+    validations:
+      required: true
+
+  - type: textarea
+    id: container
+    attributes:
+      label: Container execution plan
+      description: Identify an official image or explain the proposed Dockerfile, pinning, and update strategy.
+    validations:
+      required: true
+
+  - type: textarea
+    id: safety
+    attributes:
+      label: Security boundaries
+      description: Explain authorization requirements, network behavior, privileges, secrets, rate limits, and destructive capabilities.
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Proposed integration design
+      description: Identify affected modules, MCP tools, worker images, tests, and documentation.
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmation
+      options:
+        - label: The integration is intended for authorized reconnaissance or defensive security.
+          required: true
+        - label: I reviewed the upstream project's license and distribution terms.
+          required: true
+        - label: I searched existing integrations and proposals for overlap.
+          required: true
+        - label: I am willing to submit an implementation pull request.
+          required: false

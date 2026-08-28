@@ -1,0 +1,77 @@
+name: Feature request
+description: Propose an improvement to Reconnator
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the problem first, then the proposed solution. For a new
+        scanner or security-tool integration, use the dedicated integration form.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: What limitation or user need would this address?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the desired behavior, interface, and workflow.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Project area
+      options:
+        - Agent or MCP orchestration
+        - Telegram ChatOps
+        - Scanner workflow
+        - Reporting
+        - Containers or supply chain
+        - Kubernetes or Helm
+        - CI/CD
+        - Documentation or contributor experience
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What workarounds or alternative designs have you considered?
+
+  - type: textarea
+    id: security
+    attributes:
+      label: Security and authorization impact
+      description: Explain new permissions, tools, network access, secrets, or trust boundaries.
+      placeholder: "Write None if there is no expected security impact."
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add diagrams, examples, references, or screenshots with sensitive data removed.
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmation
+      options:
+        - label: I searched existing issues and roadmap items for this proposal.
+          required: true
+        - label: This proposal supports authorized and responsible use.
+          required: true
+        - label: I am willing to help implement this feature.
+          required: false

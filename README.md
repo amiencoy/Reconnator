@@ -115,7 +115,12 @@ helm install recon-bot . \
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are very welcome. If you want to expand the MCP toolset, check out `mcp_server.py` and drop a PR.
+Contributions, issues, and feature requests are welcome. Before participating,
+read the [Contributing Guidelines](CONTRIBUTING.md) and
+[Code of Conduct](CODE_OF_CONDUCT.md).
+
+Do not report vulnerabilities through public issues. Follow the
+[Security Policy](SECURITY.md) for private disclosure.
 
 ## 💖 Support Reconnator
 

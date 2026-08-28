@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability privately
+    url: https://github.com/amiencoy/Reconnator/security/policy
+    about: Do not disclose vulnerabilities in a public issue. Follow the private reporting instructions.
+  - name: Report a Code of Conduct incident
+    url: https://github.com/amiencoy/Reconnator/blob/main/CODE_OF_CONDUCT.md#reporting-a-violation
+    about: Use the private contact listed in the Code of Conduct.

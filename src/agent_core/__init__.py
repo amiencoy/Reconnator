@@ -1,5 +1,7 @@
 """Security Agent Core public API."""
 
+__version__ = "2.1.0"
+
 from .agent import AgentCore, TurnResult
 from .contracts import AuthorizationContext, PolicyConfig, PolicyDecision
 from .mcp import MCPAdapter, StdioMCPAdapter
@@ -12,6 +14,7 @@ from .providers import (
 )
 
 __all__ = [
+    "__version__",
     "AuthorizationContext",
     "AgentCore",
     "MCPAdapter",

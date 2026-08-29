@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# These tests exercise local OpenAI-compatible provider requests and tool responses.  #
+# They validate self-hosted model support without requiring a live cloud dependency.  #
+# ==================================================================================== #
+
 import json
 import threading
 import unittest

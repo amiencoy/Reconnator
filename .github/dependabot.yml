@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This is Reconnator's Dependabot policy for Python, containers, and GitHub Actions.  #
+# It keeps dependency upgrades visible through scheduled, reviewable pull requests.   #
+# ==================================================================================== #
+
 version: 2
 
 updates:

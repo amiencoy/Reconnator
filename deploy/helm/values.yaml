@@ -1,7 +1,7 @@
 # ============================================================================================================================================ #
 # This is the values.yaml file. The configuration hub for our Helm chart.                                                                      #
 # We stripped out the old 'schedule' and 'targetDomain' because now it runs 24/7 as a Telegram bot and takes targets dynamically via chat.     #
-# We also added the AI block to securely pass the Gemini API key to the agent.                                                                 #
+# The AI block supports local and hosted OpenAI-compatible providers.                                                                          #
 # ============================================================================================================================================ #
 
 image:
@@ -12,6 +12,15 @@ image:
 telegram:
   botToken: ""
   chatId: ""
+  allowedChatIds: ""
 
 ai:
+  provider: ollama
+  model: qwen3:8b
+  # Use a Kubernetes Service URL here. localhost points to the Reconnator pod.
+  baseUrl: http://ollama.default.svc.cluster.local:11434/v1/chat/completions
+  temperature: "0"
+  timeoutSeconds: "300"
+  apiKey: ""
+  # Legacy fallback used only when provider is gemini.
   geminiApiKey: ""

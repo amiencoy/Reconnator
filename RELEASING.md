@@ -2,7 +2,7 @@
 
 Reconnator follows [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html).
 The version itself is written as `MAJOR.MINOR.PATCH`; Git tags add a leading
-`v`, for example `v2.0.1`.
+`v`, for example `v2.1.0`.
 
 ## Choosing the Next Version
 
@@ -32,20 +32,20 @@ can ship together in one patch release.
 5. Create and push an annotated tag:
 
    ```bash
-   git tag -a v2.0.1 -m "Reconnator v2.0.1"
-   git push origin v2.0.1
+   git tag -a v2.1.0 -m "Reconnator v2.1.0"
+   git push origin v2.1.0
    ```
 
 6. Create a GitHub Release from the tag, review the generated notes, and mark a
    stable release as the latest release.
 7. Verify the GitHub Actions run and the corresponding GHCR image tags.
 
-Stable version tags trigger container publishing. For `v2.0.1`, the expected
+Stable version tags trigger container publishing. For `v2.1.0`, the expected
 image aliases are:
 
 ```text
-ghcr.io/amiencoy/reconnator:2.0.1
-ghcr.io/amiencoy/reconnator:2.0
+ghcr.io/amiencoy/reconnator:2.1.0
+ghcr.io/amiencoy/reconnator:2.1
 ghcr.io/amiencoy/reconnator:2
 ghcr.io/amiencoy/reconnator:latest
 ```

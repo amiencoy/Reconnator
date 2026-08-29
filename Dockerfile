@@ -13,7 +13,8 @@ LABEL description="Reconnator - Modern Cloud-Native Recon Bot"
 
 WORKDIR /app
 
-RUN apk add --no-cache docker-cli
+RUN apk upgrade --no-cache \
+    && apk add --no-cache docker-cli
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt

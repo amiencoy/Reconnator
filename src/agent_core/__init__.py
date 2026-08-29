@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This package exposes the public API for Reconnator's provider-agnostic agent core.  #
+# Consumers import the stable agent, contract, policy, and prompt interfaces here.    #
+# ==================================================================================== #
+
 """Security Agent Core public API."""
 
 __version__ = "2.2.0"

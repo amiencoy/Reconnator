@@ -1,5 +1,5 @@
 # ==================================================================================== #
-# This is the main Dockerfile for Reconnator. The brain center of the Cave-Sec agent.  #
+# This is the main Dockerfile for Reconnator's provider-agnostic security agent.       #
 # It builds a lightweight Alpine container to run the Telegram bot and the MCP server. #
 # CRITICAL: I install docker-cli so this container can spawn our ephemeral tool        #
 # containers (Nmap, Ffuf, Nuclei, Subfinder) using the host's Docker daemon (DooD).    #

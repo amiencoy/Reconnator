@@ -4,7 +4,7 @@
 
 # Reconnator 2.0.1: The AI Powered Reconnaisance Tool
 
-**Reconnator** has evolved. What started as a simple, scheduled passive reconnaissance script is now a fully interactive, AI-driven Reconnaisance assistant. Powered by Google Gemini and the Model Context Protocol (MCP), Reconnator operates as a Telegram bot with a highly efficient, somewhat brutal AI persona. 
+**Reconnator** has evolved. What started as a simple, scheduled passive reconnaissance script is now a fully interactive, AI-driven Reconnaisance assistant. Powered by a provider-agnostic agent core and the Model Context Protocol (MCP), Reconnator can use local or hosted models through an OpenAI-compatible API.
 
 It orchestrates vulnerability scanning, dynamically routes tools, and seamlessly integrates into modern infrastructure (Docker/Kubernetes) using a container-native attack architecture.
 
@@ -17,7 +17,8 @@ It orchestrates vulnerability scanning, dynamically routes tools, and seamlessly
 
 ## Key Features (v2.x Architecture)
 
-- 🧠 **AI Brain (Gemini + MCP):** No more rigid menus, just chat with the bot natively. The AI understands your intent, dynamically fetches tools from the MCP Server, and executes complex recon pipelines based on conversational context.
+- 🧠 **Provider-Agnostic AI + MCP:** Use local Qwen models through Ollama, vLLM, LM Studio, or llama.cpp, connect another OpenAI-compatible endpoint, or retain Gemini as an optional provider.
+- 🔐 **Policy-Gated Tool Calls:** Active scanners require a configured Telegram operator, explicit target scope, and runtime approval. Unknown and out-of-scope tools are denied before reaching MCP.
 - 🐳 **Ephemeral Docker Workers (DooD):** Attack engines (Nmap, Ffuf, Nuclei, Subfinder) are executed asynchronously inside disposable Docker containers (`--rm`). This prevents dependency hell and keeps the host system squeaky clean.
 - 📄 **PDF Reporting:** Automatically compiles raw JSON scan data into a clean, professional PDF report sent directly to your Telegram chat.
 - ☸️ **Always-On Kubernetes Daemon:** Transitioned from a legacy CronJob to a 24/7 Kubernetes `Deployment` using Docker-out-of-Docker (DooD) socket mounting for enterprise-grade scalability.
@@ -37,6 +38,7 @@ Start with:
 - [Deployment](https://github.com/amiencoy/Reconnator/wiki/Deployment)
 - [Security and Responsible Use](https://github.com/amiencoy/Reconnator/wiki/Security-and-Responsible-Use)
 - [Troubleshooting](https://github.com/amiencoy/Reconnator/wiki/Troubleshooting)
+- [Local and Self-Hosted Models](docs/LOCAL_MODELS.md)
 
 ---
 
@@ -54,7 +56,7 @@ cd reconnator
 # Setup Environment Variables (Rename the example file)
 cp .env.example .env
 
-# Edit .env and add your TELEGRAM_BOT_TOKEN and GEMINI_API_KEY
+# Edit .env. Configure Telegram plus your selected local or hosted AI provider.
 nano .env
 
 # Build the main Reconnator bot image
@@ -63,13 +65,21 @@ docker build -t reconnator:v2 .
 # Run the Bot 24/7 (CRITICAL: Mount the docker.sock!)
 docker run -d \
   --name reconnator-bot \
+  --add-host=host.docker.internal:host-gateway \
   -v /var/run/docker.sock:/var/run/docker.sock \
   --env-file .env \
   reconnator:v2
 
 ```
 
-*Once running, open your Telegram bot and simply say: "scan on example.com with nmap, ffuf and nuclei"*
+For a host Ollama instance, set `AI_BASE_URL=http://host.docker.internal:11434/v1/chat/completions`
+inside `.env`. Before scanning, authorize an exact engagement scope:
+
+```text
+/authorize example.com ticket=ENG-001
+scan example.com with nmap, ffuf and nuclei
+/revoke
+```
 
 ### Option 2: Kubernetes & Helm
 
@@ -82,7 +92,10 @@ cd deploy/helm
 # Install the chart and inject secrets dynamically
 helm install recon-bot . \
   --set telegram.botToken="YOUR_TELEGRAM_TOKEN" \
-  --set ai.geminiApiKey="YOUR_GEMINI_API_KEY"
+  --set telegram.allowedChatIds="YOUR_TELEGRAM_CHAT_ID" \
+  --set ai.provider="ollama" \
+  --set ai.model="qwen3:8b" \
+  --set ai.baseUrl="http://ollama.default.svc.cluster.local:11434/v1/chat/completions"
 
 ```
 
@@ -95,8 +108,10 @@ helm install recon-bot . \
 ├── .github/workflows/    # CI/CD pipelines (Auto GHCR publishing)
 ├── deploy/helm/          # Kubernetes Helm Chart (Deployment + DooD)
 ├── src/                  # Core Application
+│   ├── agent_core/       # Provider, MCP, prompt, and policy runtime
+│   ├── config/           # Agent policy-as-code
 │   ├── modules/          # Ephemeral Engines (nmap, ffuf, nuclei, subfinder, otx, report)
-│   ├── agent_core.py     # The AI Brain: Gemini routing & persona
+│   ├── modules/agent_core.py # Reconnator consumer adapter
 │   ├── mcp_server.py     # The Arsenal: MCP tool registration & schema mapping
 │   └── bot.py            # The Mouth & Ears: Telegram ChatOps entrypoint
 ├── Dockerfile            # Main Alpine-based bot container
@@ -114,7 +129,8 @@ helm install recon-bot . \
 
 * [x] Integrate Nmap for deep port & service mapping.
 * [x] Integrate Ffuf with baked-in SecLists for directory fuzzing.
-* [x] **Layer 3 AI Analysis:** Implement Gemini and MCP to orchestrate the pipeline natively.
+* [x] **Layer 3 AI Analysis:** Implement provider-agnostic AI and MCP orchestration.
+* [x] Support self-hosted OpenAI-compatible models with policy-gated tool calls.
 * [x] Automated report generation (PDF output).
 * [ ] Implement multi-target parallel scanning capabilities.
 * [ ] Add continuous monitoring diffs (alerting only on *new* vulnerabilities).

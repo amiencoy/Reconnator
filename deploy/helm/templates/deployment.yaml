@@ -29,6 +29,17 @@ spec:
         envFrom:
         - secretRef:
             name: {{ .Release.Name }}-telegram-secret
+        env:
+        - name: AI_PROVIDER
+          value: {{ .Values.ai.provider | quote }}
+        - name: AI_MODEL
+          value: {{ .Values.ai.model | quote }}
+        - name: AI_BASE_URL
+          value: {{ .Values.ai.baseUrl | quote }}
+        - name: AI_TEMPERATURE
+          value: {{ .Values.ai.temperature | quote }}
+        - name: AI_TIMEOUT_SECONDS
+          value: {{ .Values.ai.timeoutSeconds | quote }}
 
         volumeMounts:
         - name: docker-sock

@@ -13,3 +13,4 @@ reportlab
 mcp
 fastmcp
 dotenv
+PyYAML

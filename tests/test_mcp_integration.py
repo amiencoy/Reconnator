@@ -10,7 +10,10 @@ class MCPIntegrationTests(unittest.IsolatedAsyncioTestCase):
         server = Path(__file__).resolve().parents[1] / "src" / "mcp_server.py"
         adapter = StdioMCPAdapter(server)
         try:
-            tools = await asyncio.wait_for(adapter.list_tools(), timeout=30)
+            # Keep MCP connection setup and teardown in the same task. AnyIO's
+            # cancel scopes require this on Python 3.11.
+            async with asyncio.timeout(30):
+                tools = await adapter.list_tools()
         finally:
             await adapter.aclose()
 
@@ -29,4 +32,3 @@ class MCPIntegrationTests(unittest.IsolatedAsyncioTestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

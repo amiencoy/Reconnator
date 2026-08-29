@@ -9,6 +9,15 @@ image:
   tag: "2.2.0"
   pullPolicy: IfNotPresent
 
+podSecurityContext:
+  runAsUser: 65532
+  runAsGroup: 65532
+  fsGroup: 65532
+
+dockerSocket:
+  # Match the docker group GID on the Kubernetes node.
+  groupId: 999
+
 telegram:
   botToken: ""
   chatId: ""

@@ -33,7 +33,10 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Build image for scanning
-        run: docker build --tag reconnator:security-scan .
+        run: |
+          docker build --tag reconnator:security-scan .
+          docker run --rm --entrypoint python reconnator:security-scan -c \
+            "from importlib.metadata import version; assert version('msgpack') == '1.2.2'; assert version('setuptools') == '84.0.0'"
       - name: Scan repository dependencies and configuration
         uses: aquasecurity/trivy-action@v0.36.0
         with:

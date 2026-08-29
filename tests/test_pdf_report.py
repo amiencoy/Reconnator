@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# These tests verify automatic PDF report generation from accumulated scan evidence.  #
+# They protect the ReportLab output path used by the Telegram delivery workflow.      #
+# ==================================================================================== #
+
 import os
 import tempfile
 import unittest
@@ -28,4 +33,3 @@ class PDFReportTests(unittest.IsolatedAsyncioTestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

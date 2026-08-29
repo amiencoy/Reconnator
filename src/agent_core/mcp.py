@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This module adapts Model Context Protocol tools for the provider-agnostic agent.     #
+# It discovers schemas and normalizes calls before handing them to the MCP session.   #
+# ==================================================================================== #
+
 from __future__ import annotations
 
 import sys

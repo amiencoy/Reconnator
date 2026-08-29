@@ -5,8 +5,8 @@
 # ============================================================================================================================================ #
 
 image:
-  repository: reconnator
-  tag: "v2"
+  repository: ghcr.io/amiencoy/reconnator
+  tag: "2.2.0"
   pullPolicy: IfNotPresent
 
 telegram:

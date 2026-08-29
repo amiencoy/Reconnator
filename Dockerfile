@@ -6,7 +6,7 @@
 # NB: main.py is dead. The true entrypoint is now bot.py                               #
 # ==================================================================================== #
 
-FROM python:3.11-alpine
+FROM python:3.14-alpine
 
 LABEL maintainer="amiencoy"
 LABEL description="Reconnator - Modern Cloud-Native Recon Bot"

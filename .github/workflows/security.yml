@@ -7,6 +7,8 @@ on:
       - "src/**"
       - "Dockerfile"
       - "requirements.txt"
+      - "deploy/helm/**"
+      - ".trivyignore"
       - ".github/workflows/security.yml"
   push:
     branches: [main]
@@ -14,6 +16,8 @@ on:
       - "src/**"
       - "Dockerfile"
       - "requirements.txt"
+      - "deploy/helm/**"
+      - ".trivyignore"
       - ".github/workflows/security.yml"
   schedule:
     - cron: "41 3 * * 1"

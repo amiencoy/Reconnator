@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# These tests verify agent orchestration, normalized tool calls, and response handling. #
+# They protect the provider-agnostic execution loop from behavioral regressions.      #
+# ==================================================================================== #
+
 import unittest
 
 from agent_core.agent import AgentCore

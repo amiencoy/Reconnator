@@ -7,6 +7,29 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [2.2.0] - 2026-08-29
+
+### Added
+
+- Python 3.11 and 3.14 CI test matrix.
+- MCP stdio, Telegram authorization, and PDF generation integration tests.
+- Pull-request container build validation and runtime smoke testing.
+- CodeQL analysis and Trivy repository/container security scanning.
+
+### Changed
+
+- Pinned all direct Python runtime dependencies to reviewed versions.
+- Updated the production runtime to Python 3.14 Alpine.
+- Updated the Helm image defaults to the official versioned GHCR image.
+
+### Removed
+
+- Unused `requests`, direct `aiohttp`, and duplicate `dotenv` dependencies.
+
+### Security
+
+- Added blocking HIGH/CRITICAL vulnerability, misconfiguration, and secret scans.
+
 ## [2.1.0] - 2026-08-29
 
 ### Added
@@ -72,7 +95,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - Replaced the scheduled passive-reconnaissance flow with an interactive,
   container-native reconnaissance architecture.
 
-[Unreleased]: https://github.com/amiencoy/Reconnator/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/amiencoy/Reconnator/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/amiencoy/Reconnator/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/amiencoy/Reconnator/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/amiencoy/Reconnator/releases/tag/v2.0.1
 [2.0.0]: https://github.com/amiencoy/Reconnator/commit/9899c7f

@@ -7,4 +7,5 @@
 FROM projectdiscovery/nuclei:latest
 RUN nuclei -update-templates
 RUN nuclei -update
+USER 65532:65532
 ENTRYPOINT ["nuclei"]

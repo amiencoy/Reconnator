@@ -22,10 +22,25 @@ spec:
       labels:
         app: reconnator
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: {{ .Values.podSecurityContext.runAsUser }}
+        runAsGroup: {{ .Values.podSecurityContext.runAsGroup }}
+        fsGroup: {{ .Values.podSecurityContext.fsGroup }}
+        supplementalGroups:
+        - {{ .Values.dockerSocket.groupId }}
+        seccompProfile:
+          type: RuntimeDefault
       containers:
       - name: reconnator
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
         envFrom:
         - secretRef:
             name: {{ .Release.Name }}-telegram-secret
@@ -40,13 +55,23 @@ spec:
           value: {{ .Values.ai.temperature | quote }}
         - name: AI_TIMEOUT_SECONDS
           value: {{ .Values.ai.timeoutSeconds | quote }}
+        - name: HOME
+          value: /tmp
 
         volumeMounts:
         - name: docker-sock
           mountPath: /var/run/docker.sock
+        - name: reports
+          mountPath: /app/generated_reports
+        - name: tmp
+          mountPath: /tmp
           
       volumes:
       - name: docker-sock
         hostPath:
           path: /var/run/docker.sock
           type: Socket
+      - name: reports
+        emptyDir: {}
+      - name: tmp
+        emptyDir: {}

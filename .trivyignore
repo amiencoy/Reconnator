@@ -1,0 +1,10 @@
+# Reconnator intentionally mounts the host Docker socket to launch isolated scanner
+# containers. This is a documented trust boundary; production clusters should use a
+# dedicated node and match dockerSocket.groupId to the node's docker group.
+KSV-0006
+
+# The Python 3.14 base image publishes third-party SBOM metadata for the versions
+# originally present in its layer. The Docker build gate above verifies that the
+# final image actually contains patched msgpack 1.2.2 and setuptools 84.0.0.
+GHSA-6v7p-g79w-8964
+CVE-2025-47273

@@ -16,4 +16,10 @@ RUN mkdir -p /wordlists
 RUN wget -q -O /wordlists/quick.txt https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/common.txt
 RUN wget -q -O /wordlists/deep.txt https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/raft-small-directories.txt
 
+RUN addgroup -S -g 65532 scanner \
+    && adduser -S -D -H -u 65532 -G scanner scanner \
+    && chown -R 65532:65532 /wordlists
+
+USER 65532:65532
+
 ENTRYPOINT ["ffuf"]

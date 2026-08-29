@@ -1,0 +1,56 @@
+name: Container security
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "Dockerfile"
+      - "requirements.txt"
+      - "deploy/helm/**"
+      - ".trivyignore"
+      - ".github/workflows/security.yml"
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "Dockerfile"
+      - "requirements.txt"
+      - "deploy/helm/**"
+      - ".trivyignore"
+      - ".github/workflows/security.yml"
+  schedule:
+    - cron: "41 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  trivy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build image for scanning
+        run: |
+          docker build --tag reconnator:security-scan .
+          docker run --rm --entrypoint python reconnator:security-scan -c \
+            "from importlib.metadata import version; assert version('msgpack') == '1.2.2'; assert version('setuptools') == '84.0.0'"
+      - name: Scan repository dependencies and configuration
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          scanners: vuln,misconfig,secret
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+          exit-code: "1"
+      - name: Scan container image
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: reconnator:security-scan
+          scanners: vuln,secret
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+          exit-code: "1"

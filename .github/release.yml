@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This file groups merged pull requests into consistent GitHub Release notes.         #
+# Its categories keep features, fixes, security work, and maintenance easy to scan.   #
+# ==================================================================================== #
+
 changelog:
   exclude:
     labels:

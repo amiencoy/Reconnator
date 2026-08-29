@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This issue form collects reproducible bug reports with environment and log details. #
+# It helps maintainers distinguish product defects from configuration failures.       #
+# ==================================================================================== #
+
 name: Bug report
 description: Report a reproducible problem in Reconnator
 title: "[Bug]: "

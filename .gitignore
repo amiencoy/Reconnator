@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This file keeps credentials, local environments, caches, and reports out of Git.    #
+# It protects generated or machine-specific files from entering release history.      #
+# ==================================================================================== #
+
 # Environments
 .env
 venv/

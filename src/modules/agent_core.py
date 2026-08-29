@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This adapter connects legacy Reconnator imports to the provider-agnostic agent core. #
+# It preserves existing consumers while removing the former Gemini-only dependency.  #
+# ==================================================================================== #
+
 """Reconnator consumer for the provider-agnostic security agent core.
 
 Product concerns stay in Reconnator. Provider selection, MCP transport, prompt

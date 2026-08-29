@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# These tests verify MCP tool discovery and execution across the agent integration.   #
+# They catch schema or transport regressions before scanner commands reach runtime.   #
+# ==================================================================================== #
+
 import asyncio
 import unittest
 from pathlib import Path

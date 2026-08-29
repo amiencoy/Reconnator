@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This file controls the repository issue chooser and disables unstructured reports.  #
+# Security reports are redirected away from public issues to the private policy.      #
+# ==================================================================================== #
+
 blank_issues_enabled: false
 contact_links:
   - name: Report a security vulnerability privately

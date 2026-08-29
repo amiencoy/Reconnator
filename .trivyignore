@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This file documents narrowly reviewed Trivy exceptions for the release image gate.  #
+# Every entry requires an explicit rationale and must not hide an unreviewed finding.  #
+# ==================================================================================== #
+
 # Reconnator intentionally mounts the host Docker socket to launch isolated scanner
 # containers. This is a documented trust boundary; production clusters should use a
 # dedicated node and match dockerSocket.groupId to the node's docker group.

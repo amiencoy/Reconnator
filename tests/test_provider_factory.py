@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# These tests verify provider presets, environment parsing, and configuration errors. #
+# They keep local, hosted, Gemini, and custom endpoint selection deterministic.        #
+# ==================================================================================== #
+
 import unittest
 
 from agent_core.providers import ProviderConfigurationError, create_provider, create_provider_from_env

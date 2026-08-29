@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This issue form evaluates new scanner and security-tool integrations.                #
+# It records authorization, container, input-validation, and output-handling needs.   #
+# ==================================================================================== #
+
 name: Scanner or tool integration
 description: Propose a new authorized reconnaissance or security-tool integration
 title: "[Integration]: "

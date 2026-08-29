@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This module selects and configures local or hosted AI provider implementations.     #
+# Presets cover Ollama, vLLM, LM Studio, llama.cpp, Gemini, and custom endpoints.      #
+# ==================================================================================== #
+
 from __future__ import annotations
 
 import os

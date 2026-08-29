@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This module defines the common protocol and response types for every AI provider.   #
+# Provider implementations return normalized assistant messages and tool calls.       #
+# ==================================================================================== #
+
 from __future__ import annotations
 
 from typing import Any, Protocol

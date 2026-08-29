@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This workflow validates the agent core and production container across Python builds. #
+# It runs policy, provider, MCP, report, authorization, and smoke regression checks.   #
+# ==================================================================================== #
+
 name: Test and smoke check
 
 on:

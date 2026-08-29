@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This module orchestrates AI responses, MCP tool calls, and runtime policy checks.    #
+# It keeps provider selection separate from authorized security-tool execution.       #
+# ==================================================================================== #
+
 from __future__ import annotations
 
 import asyncio

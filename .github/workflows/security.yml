@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This workflow scans container artifacts for known vulnerabilities with Trivy.       #
+# It provides supply-chain feedback before a Reconnator image is trusted upstream.    #
+# ==================================================================================== #
+
 name: Container security
 
 on:

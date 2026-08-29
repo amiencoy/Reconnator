@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This module defines configuration and authorization contracts for the agent core.   #
+# Typed contracts make provider, target, and approval boundaries explicit to callers. #
+# ==================================================================================== #
+
 """Configuration and authorization contracts for Security Agent Core."""
 
 from __future__ import annotations

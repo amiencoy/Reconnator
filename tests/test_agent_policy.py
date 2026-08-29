@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# These tests verify target authorization, approval requirements, and policy limits.  #
+# They ensure model output cannot bypass Reconnator's runtime security boundary.      #
+# ==================================================================================== #
+
 import unittest
 
 from agent_core.contracts import AuthorizationContext, PolicyConfig

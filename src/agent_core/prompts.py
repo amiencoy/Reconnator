@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This module assembles the security agent's evidence-preserving system instructions. #
+# Prompts guide model behavior while executable policy remains the security boundary. #
+# ==================================================================================== #
+
 """System prompt assembly for a concise, evidence-preserving security agent."""
 
 from .contracts import PolicyConfig

@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# These tests verify that only explicitly allowed Telegram chats can invoke scanning. #
+# They protect the single ChatOps entrypoint from unauthorized multi-user execution.  #
+# ==================================================================================== #
+
 import os
 import unittest
 
@@ -23,4 +28,3 @@ class TelegramAuthorizationTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

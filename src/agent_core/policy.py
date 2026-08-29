@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This module enforces runtime authorization independently from AI prompt behavior.   #
+# It validates targets, approvals, tools, and limits before execution is permitted.   #
+# ==================================================================================== #
+
 """Runtime authorization enforcement. Prompt instructions are not a security boundary."""
 
 from __future__ import annotations

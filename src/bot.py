@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This is Reconnator's Telegram ChatOps entrypoint and user-facing command controller. #
+# It authorizes chats, invokes the policy-gated agent core, and returns scan results.  #
+# ==================================================================================== #
+
 """Telegram ChatOps consumer for Reconnator's policy-gated agent core."""
 
 from __future__ import annotations

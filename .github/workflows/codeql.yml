@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This workflow performs CodeQL static analysis on Reconnator's Python codebase.       #
+# It detects security-relevant code patterns on protected branches and pull requests. #
+# ==================================================================================== #
+
 name: CodeQL
 
 on:
@@ -23,4 +28,3 @@ jobs:
         with:
           languages: python
       - uses: github/codeql-action/analyze@v4
-

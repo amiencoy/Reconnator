@@ -10,6 +10,8 @@ aiogram==3.31.0
 fastmcp==3.4.7
 httpx==0.28.1
 mcp==1.29.1
+msgpack==1.2.2
 python-dotenv==1.2.3
 PyYAML==6.0.3
 reportlab==5.0.1
+setuptools==84.0.0

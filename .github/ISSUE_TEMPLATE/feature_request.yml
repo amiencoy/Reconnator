@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This issue form captures proposed Reconnator features and their intended use cases. #
+# It asks for scope and security impact before work enters the public roadmap.         #
+# ==================================================================================== #
+
 name: Feature request
 description: Propose an improvement to Reconnator
 title: "[Feature]: "

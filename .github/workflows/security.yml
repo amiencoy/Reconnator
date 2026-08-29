@@ -31,7 +31,7 @@ jobs:
       - name: Build image for scanning
         run: docker build --tag reconnator:security-scan .
       - name: Scan repository dependencies and configuration
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: fs
           scan-ref: .
@@ -40,11 +40,10 @@ jobs:
           ignore-unfixed: true
           exit-code: "1"
       - name: Scan container image
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: reconnator:security-scan
           scanners: vuln,secret
           severity: HIGH,CRITICAL
           ignore-unfixed: true
           exit-code: "1"
-

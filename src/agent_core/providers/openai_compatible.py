@@ -1,3 +1,8 @@
+# ==================================================================================== #
+# This module implements the shared OpenAI-compatible chat-completions transport.     #
+# It supports provider-neutral messages, authentication, and structured tool calls.   #
+# ==================================================================================== #
+
 from __future__ import annotations
 
 import asyncio

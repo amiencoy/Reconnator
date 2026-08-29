@@ -8,6 +8,9 @@ name: Test and smoke check
 on:
   pull_request:
     paths:
+      - "**/*.py"
+      - "**/*.yml"
+      - "**/*.yaml"
       - "src/**"
       - "tests/**"
       - "requirements.txt"
@@ -17,6 +20,9 @@ on:
     branches:
       - main
     paths:
+      - "**/*.py"
+      - "**/*.yml"
+      - "**/*.yaml"
       - "src/**"
       - "tests/**"
       - "requirements.txt"
@@ -28,6 +34,13 @@ permissions:
   contents: read
 
 jobs:
+  file-banners:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Reject Python or YAML files without a feature banner
+        run: python scripts/check_file_banners.py
+
   unit-tests:
     runs-on: ubuntu-latest
     strategy:

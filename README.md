@@ -2,7 +2,7 @@
   <img src="assets/reconnator-banner.jpeg" alt="ReconnatoR" width="972">
 </p>
 
-# Reconnator 2.0.1: The AI Powered Reconnaisance Tool
+# Reconnator 2.1.0: The AI Powered Reconnaisance Tool
 
 **Reconnator** has evolved. What started as a simple, scheduled passive reconnaissance script is now a fully interactive, AI-driven Reconnaisance assistant. Powered by a provider-agnostic agent core and the Model Context Protocol (MCP), Reconnator can use local or hosted models through an OpenAI-compatible API.
 
@@ -60,7 +60,7 @@ cp .env.example .env
 nano .env
 
 # Build the main Reconnator bot image
-docker build -t reconnator:v2 .
+docker build -t reconnator:2.1.0 .
 
 # Run the Bot 24/7 (CRITICAL: Mount the docker.sock!)
 docker run -d \
@@ -68,7 +68,7 @@ docker run -d \
   --add-host=host.docker.internal:host-gateway \
   -v /var/run/docker.sock:/var/run/docker.sock \
   --env-file .env \
-  reconnator:v2
+  reconnator:2.1.0
 
 ```
 
@@ -157,7 +157,7 @@ Sponsorship supports the project's open-source development and does not include 
 ## 📦 Releases and Versioning
 
 Reconnator follows [Semantic Versioning](https://semver.org/). The current
-release is **v2.0.1**. See the [GitHub Releases](https://github.com/amiencoy/Reconnator/releases),
+release is **v2.1.0**. See the [GitHub Releases](https://github.com/amiencoy/Reconnator/releases),
 [Changelog](CHANGELOG.md), and [Release Guide](RELEASING.md) for details.
 
 ## 📄 License

@@ -7,6 +7,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-08-29
+
 ### Added
 
 - Provider-agnostic agent runtime with local presets for Ollama, vLLM, LM Studio,
@@ -70,6 +72,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - Replaced the scheduled passive-reconnaissance flow with an interactive,
   container-native reconnaissance architecture.
 
-[Unreleased]: https://github.com/amiencoy/Reconnator/compare/v2.0.1...HEAD
+[Unreleased]: https://github.com/amiencoy/Reconnator/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/amiencoy/Reconnator/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/amiencoy/Reconnator/releases/tag/v2.0.1
 [2.0.0]: https://github.com/amiencoy/Reconnator/commit/9899c7f

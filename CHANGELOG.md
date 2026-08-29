@@ -7,6 +7,22 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Added
+
+- Provider-agnostic agent runtime with local presets for Ollama, vLLM, LM Studio,
+  and llama.cpp, using Qwen through Ollama by default.
+- Runtime policy enforcement for MCP tool allowlists, operator approval, and
+  authorized target scope.
+- Telegram commands for granting, inspecting, and revoking per-chat scan scope.
+- Local-model configuration for Docker and Helm deployments.
+- Agent-core unit tests and a dedicated GitHub Actions test workflow.
+
+### Changed
+
+- Gemini is now an optional compatibility provider instead of a mandatory runtime
+  dependency.
+- Telegram requests are restricted to configured operator chat IDs.
+
 ## [2.0.1] - 2026-08-28
 
 ### Added

@@ -1,4 +1,4 @@
-name: Test agent core
+name: Test and smoke check
 
 on:
   pull_request:
@@ -6,6 +6,7 @@ on:
       - "src/**"
       - "tests/**"
       - "requirements.txt"
+      - "Dockerfile"
       - ".github/workflows/test.yml"
   push:
     branches:
@@ -14,6 +15,7 @@ on:
       - "src/**"
       - "tests/**"
       - "requirements.txt"
+      - "Dockerfile"
       - ".github/workflows/test.yml"
   workflow_dispatch:
 
@@ -23,17 +25,36 @@ permissions:
 jobs:
   unit-tests:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.14"]
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
         with:
-          python-version: "3.11"
+          python-version: ${{ matrix.python-version }}
           cache: pip
-      - name: Install test dependency
-        run: python -m pip install PyYAML
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip check
       - name: Run unit tests
         env:
           PYTHONPATH: src
         run: python -m unittest discover -s tests -v
       - name: Compile agent source
         run: python -m compileall -q src tests
+
+  container-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: docker/setup-buildx-action@v4
+      - name: Build release image
+        run: docker build --tag reconnator:test .
+      - name: Verify packaged runtime and version
+        run: |
+          docker run --rm --entrypoint python reconnator:test -c \
+            "import sys; sys.path.insert(0, '/app/src'); import agent_core; assert agent_core.__version__ == '2.2.0'; print(agent_core.__version__)"

@@ -1,0 +1,33 @@
+agent:
+  name: Reconnator Security Agent
+  domain: authorized defensive cybersecurity and DevSecOps operations
+
+authorization:
+  default_deny: true
+  require_declared_scope: true
+
+allowed_tools:
+  - name: execute_subdomain_recon
+    requires_approval: true
+    target_fields: [domain]
+  - name: execute_nmap
+    requires_approval: true
+    target_fields: [target]
+  - name: execute_nuclei
+    requires_approval: true
+    target_fields: [target]
+  - name: execute_ffuf
+    requires_approval: true
+    target_fields: [target]
+  - name: create_pdf_report
+    requires_approval: false
+    target_fields: []
+
+forbidden_tools:
+  - exploit_target
+  - establish_persistence
+  - dump_credentials
+  - destructive_test
+
+output:
+  style: concise-evidence-preserving

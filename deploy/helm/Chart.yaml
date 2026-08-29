@@ -9,7 +9,7 @@ name: reconnator
 description: A Cloud-Native, AI-Driven DevSecOps Reconnaissance Tools
 type: application
 version: 0.1.0
-appVersion: "2.0.0"
+appVersion: "2.0.1"
 keywords:
   - recon
   - bug-bounty

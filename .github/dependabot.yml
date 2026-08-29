@@ -14,6 +14,12 @@ updates:
       time: "09:00"
       timezone: "Asia/Jakarta"
     open-pull-requests-limit: 5
+    ignore:
+      # MCP 2.x currently conflicts with FastMCP 3.4.7's mcp<2.0 constraint.
+      # Remove this hold only in a coordinated MCP/FastMCP migration pull request.
+      - dependency-name: "mcp"
+        update-types:
+          - "version-update:semver-major"
     commit-message:
       prefix: "deps(python)"
 

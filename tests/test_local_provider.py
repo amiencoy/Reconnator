@@ -8,18 +8,19 @@ import threading
 import unittest
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
-from agent_core.providers import OpenAICompatibleProvider
+from agent_core.providers import OpenAICompatibleProvider, ProviderError
 
 
 class _Handler(BaseHTTPRequestHandler):
     request_json = None
     authorization = None
+    response_body = None
 
     def do_POST(self):
         length = int(self.headers["Content-Length"])
         type(self).request_json = json.loads(self.rfile.read(length))
         type(self).authorization = self.headers.get("Authorization")
-        body = json.dumps(
+        body = type(self).response_body or json.dumps(
             {"choices": [{"message": {"role": "assistant", "content": "[READY] | local"}}]}
         ).encode()
         self.send_response(200)
@@ -34,6 +35,7 @@ class _Handler(BaseHTTPRequestHandler):
 
 class LocalProviderTests(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
+        _Handler.response_body = None
         self.server = ThreadingHTTPServer(("127.0.0.1", 0), _Handler)
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
         self.thread.start()
@@ -56,6 +58,16 @@ class LocalProviderTests(unittest.IsolatedAsyncioTestCase):
         self.assertIsNone(_Handler.authorization)
         self.assertEqual(_Handler.request_json["model"], "local-qwen")
         self.assertEqual(_Handler.request_json["tools"][0]["function"]["name"], "test_tool")
+
+    async def test_invalid_json_is_reported_as_provider_error(self):
+        _Handler.response_body = b"not-json"
+        provider = OpenAICompatibleProvider(
+            base_url=f"http://127.0.0.1:{self.server.server_port}/v1/chat/completions",
+            model="local-qwen",
+        )
+
+        with self.assertRaisesRegex(ProviderError, "invalid JSON"):
+            await provider.complete([], [])
 
 
 if __name__ == "__main__":

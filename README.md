@@ -17,7 +17,7 @@ It orchestrates vulnerability scanning, dynamically routes tools, and seamlessly
 
 ## Key Features (v2.x Architecture)
 
-- 🧠 **Provider-Agnostic AI + MCP:** Use local Qwen models through Ollama, vLLM, LM Studio, or llama.cpp, connect another OpenAI-compatible endpoint, or retain Gemini as an optional provider.
+- 🧠 **Provider-Agnostic AI + MCP:** Use local Qwen models through Ollama, vLLM, LM Studio, or llama.cpp, connect another OpenAI-compatible endpoint, and optionally fail over to Gemini when the primary provider is unavailable.
 - 🔐 **Policy-Gated Tool Calls:** Active scanners require a configured Telegram operator, explicit target scope, and runtime approval. Unknown and out-of-scope tools are denied before reaching MCP.
 - 🐳 **Ephemeral Docker Workers (DooD):** Attack engines (Nmap, Ffuf, Nuclei, Subfinder) are executed asynchronously inside disposable Docker containers (`--rm`). This prevents dependency hell and keeps the host system squeaky clean.
 - 📄 **PDF Reporting:** Automatically compiles raw JSON scan data into a clean, professional PDF report sent directly to your Telegram chat.

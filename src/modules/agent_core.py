@@ -38,9 +38,10 @@ def get_agent_runtime() -> AgentCore:
         mcp = StdioMCPAdapter(src_root / "mcp_server.py")
         _runtime = AgentCore(provider=provider, mcp=mcp, policy=policy)
         logger.info(
-            "Security agent initialized with provider=%s model=%s",
+            "Security agent initialized with provider=%s model=%s fallback_model=%s",
             provider.__class__.__name__,
             provider.model,
+            getattr(provider, "fallback_model", "disabled"),
         )
     return _runtime
 

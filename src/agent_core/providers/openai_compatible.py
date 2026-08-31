@@ -57,7 +57,10 @@ class OpenAICompatibleProvider:
         def send() -> dict[str, Any]:
             try:
                 with urlopen(request, timeout=self.timeout_seconds) as response:
-                    return json.loads(response.read().decode("utf-8"))
+                    try:
+                        return json.loads(response.read().decode("utf-8"))
+                    except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+                        raise ProviderError("provider returned an invalid JSON response") from exc
             except HTTPError as exc:
                 body = exc.read().decode("utf-8", errors="replace")
                 raise ProviderError(f"provider returned HTTP {exc.code}: {body}") from exc

@@ -9,6 +9,8 @@ from typing import Any, Protocol
 
 
 class Provider(Protocol):
+    model: str
+
     async def complete(
         self,
         messages: list[dict[str, Any]],

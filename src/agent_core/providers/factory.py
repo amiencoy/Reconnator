@@ -9,6 +9,8 @@ import os
 from dataclasses import dataclass
 from typing import Mapping
 
+from .base import Provider
+from .fallback import FallbackProvider
 from .openai_compatible import OpenAICompatibleProvider
 
 
@@ -69,7 +71,26 @@ def create_provider(
     )
 
 
-def create_provider_from_env(env: Mapping[str, str] | None = None) -> OpenAICompatibleProvider:
+def _create_gemini_fallback(
+    values: Mapping[str, str],
+    *,
+    temperature: float,
+    timeout_seconds: float,
+) -> OpenAICompatibleProvider | None:
+    api_key = values.get("GEMINI_API_KEY")
+    if not api_key:
+        return None
+    return create_provider(
+        "gemini",
+        base_url=values.get("GEMINI_BASE_URL"),
+        model=values.get("GEMINI_MODEL"),
+        api_key=api_key,
+        temperature=temperature,
+        timeout_seconds=timeout_seconds,
+    )
+
+
+def create_provider_from_env(env: Mapping[str, str] | None = None) -> Provider:
     values = os.environ if env is None else env
     name = values.get("AI_PROVIDER", "ollama")
     api_key = values.get("AI_API_KEY")
@@ -85,11 +106,31 @@ def create_provider_from_env(env: Mapping[str, str] | None = None) -> OpenAIComp
         raise ProviderConfigurationError("AI_TIMEOUT_SECONDS must be numeric") from exc
     if timeout_seconds <= 0:
         raise ProviderConfigurationError("AI_TIMEOUT_SECONDS must be greater than zero")
-    return create_provider(
-        name,
-        base_url=values.get("AI_BASE_URL"),
-        model=values.get("AI_MODEL"),
-        api_key=api_key,
-        temperature=temperature,
-        timeout_seconds=timeout_seconds,
-    )
+    fallback = None
+    if name.lower() != "gemini":
+        fallback = _create_gemini_fallback(
+            values,
+            temperature=temperature,
+            timeout_seconds=timeout_seconds,
+        )
+
+    try:
+        primary = create_provider(
+            name,
+            base_url=values.get("AI_BASE_URL"),
+            model=values.get("AI_MODEL"),
+            api_key=api_key,
+            temperature=temperature,
+            timeout_seconds=timeout_seconds,
+        )
+    except ProviderConfigurationError:
+        missing_custom_configuration = name.lower() == "openai-compatible" and (
+            not values.get("AI_BASE_URL") or not values.get("AI_MODEL")
+        )
+        if fallback is None or not missing_custom_configuration:
+            raise
+        return fallback
+
+    if fallback is not None:
+        return FallbackProvider(primary, fallback)
+    return primary

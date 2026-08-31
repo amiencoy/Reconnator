@@ -4,14 +4,17 @@
 # ==================================================================================== #
 
 from .base import Provider
+from .fallback import FallbackProvider
 from .factory import PROVIDER_PRESETS, ProviderConfigurationError, create_provider, create_provider_from_env
-from .openai_compatible import OpenAICompatibleProvider
+from .openai_compatible import OpenAICompatibleProvider, ProviderError
 
 __all__ = [
+    "FallbackProvider",
     "OpenAICompatibleProvider",
     "PROVIDER_PRESETS",
     "Provider",
     "ProviderConfigurationError",
+    "ProviderError",
     "create_provider",
     "create_provider_from_env",
 ]

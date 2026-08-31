@@ -5,7 +5,12 @@
 
 import unittest
 
-from agent_core.providers import ProviderConfigurationError, create_provider, create_provider_from_env
+from agent_core.providers import (
+    FallbackProvider,
+    ProviderConfigurationError,
+    create_provider,
+    create_provider_from_env,
+)
 
 
 class ProviderFactoryTests(unittest.TestCase):
@@ -34,6 +39,28 @@ class ProviderFactoryTests(unittest.TestCase):
     def test_environment_configures_local_model_timeout(self):
         provider = create_provider_from_env({"AI_PROVIDER": "ollama", "AI_TIMEOUT_SECONDS": "600"})
         self.assertEqual(provider.timeout_seconds, 600)
+
+    def test_gemini_key_wraps_primary_provider_as_fallback(self):
+        provider = create_provider_from_env(
+            {"AI_PROVIDER": "ollama", "GEMINI_API_KEY": "fallback-key"}
+        )
+        self.assertIsInstance(provider, FallbackProvider)
+        self.assertEqual(provider.primary.model, "qwen3:8b")
+        self.assertEqual(provider.fallback.model, "gemini-3.5-flash-lite")
+        self.assertEqual(provider.fallback.api_key, "fallback-key")
+
+    def test_incomplete_custom_provider_uses_configured_gemini(self):
+        provider = create_provider_from_env(
+            {"AI_PROVIDER": "openai-compatible", "GEMINI_API_KEY": "fallback-key"}
+        )
+        self.assertEqual(provider.model, "gemini-3.5-flash-lite")
+        self.assertEqual(provider.api_key, "fallback-key")
+
+    def test_explicit_gemini_provider_is_not_wrapped(self):
+        provider = create_provider_from_env(
+            {"AI_PROVIDER": "gemini", "GEMINI_API_KEY": "primary-key"}
+        )
+        self.assertNotIsInstance(provider, FallbackProvider)
 
 
 if __name__ == "__main__":

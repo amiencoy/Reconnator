@@ -3,6 +3,25 @@
 Reconnator uses an OpenAI-compatible chat-completions contract. Gemini remains an
 optional provider, but the default configuration runs Qwen through Ollama.
 
+## Optional Gemini fallback
+
+Keep the local or OpenAI-compatible provider as the primary configuration, then add:
+
+```env
+GEMINI_API_KEY=your-google-ai-studio-key
+GEMINI_MODEL=gemini-3.5-flash-lite
+```
+
+The key's presence opts in to automatic failover. Reconnator calls Gemini only when
+the primary provider cannot connect, times out, returns an HTTP error, or produces an
+invalid chat-completions response. If a custom provider is selected but its endpoint
+or model is missing, Gemini starts directly. When the primary provider is healthy,
+no prompt or tool schema is sent to Gemini.
+
+Fallback changes only model transport. Authorization, scope validation, tool policy,
+and MCP execution remain enforced by the same agent runtime. Remove
+`GEMINI_API_KEY` to guarantee local-only inference.
+
 ## Ollama
 
 ```bash

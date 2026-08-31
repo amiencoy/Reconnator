@@ -7,6 +7,13 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Added
+
+- Concurrent execution for independent scanner tool calls, with report generation
+  deferred until every requested scan completes.
+- Deterministic completion of explicit multi-tool requests when an AI provider
+  returns only a partial tool-call plan.
+
 ## [2.2.0] - 2026-08-29
 
 ### Added

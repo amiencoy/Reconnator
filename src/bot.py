@@ -7,6 +7,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import os
 from collections.abc import Iterable
@@ -138,6 +139,29 @@ async def _send_denials(message: types.Message, calls: Iterable) -> None:
         )
 
 
+async def _execute_approved_workflow(runtime, calls, on_start=None):
+    """Run independent scanners concurrently, then execute report calls as a barrier."""
+    scanners = [call for call in calls if call.name != "create_pdf_report"]
+    reports = [call for call in calls if call.name == "create_pdf_report"]
+
+    async def invoke(call):
+        if on_start is not None:
+            await on_start(call)
+        try:
+            result = await runtime.mcp.call_tool(call.name, call.arguments)
+        except Exception as exc:
+            logger.exception("MCP tool failed: %s", call.name)
+            result = f"[ERROR] {call.name} failed: {exc}"
+        return call, result
+
+    completed = []
+    if scanners:
+        completed.extend(await asyncio.gather(*(invoke(call) for call in scanners)))
+    for call in reports:
+        completed.append(await invoke(call))
+    return completed
+
+
 @dp.message()
 async def handle_user_message(message: types.Message):
     if not message.text:
@@ -169,19 +193,16 @@ async def handle_user_message(message: types.Message):
     if len(allowed) > 1:
         await message.answer("`[SYS] | Running approved scan workflow...`", parse_mode="Markdown")
 
-    final_results: list[str] = []
-    pdf_filepath = None
     runtime = get_agent_runtime()
 
-    for call in allowed:
+    async def announce_start(call):
         display = call.name.replace("execute_", "").replace("_", " ").upper()
         await message.answer(f"`[SYS] | Running {display}...`", parse_mode="Markdown")
-        try:
-            result_text = await runtime.mcp.call_tool(call.name, call.arguments)
-        except Exception as exc:
-            logger.exception("MCP tool failed: %s", call.name)
-            result_text = f"[ERROR] {call.name} failed: {exc}"
 
+    completed = await _execute_approved_workflow(runtime, allowed, announce_start)
+    final_results: list[str] = []
+    pdf_filepath = None
+    for call, result_text in completed:
         if call.name == "create_pdf_report" and "[SUCCESS]" in result_text:
             pdf_filepath = result_text.split("at: ")[-1].strip()
         else:
@@ -211,6 +232,4 @@ async def main():
 
 
 if __name__ == "__main__":
-    import asyncio
-
     asyncio.run(main())

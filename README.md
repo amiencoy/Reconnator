@@ -91,6 +91,23 @@ scan example.com with nmap, ffuf and nuclei
 /revoke
 ```
 
+### Telegram commands
+
+- `/start` shows the initial authorization guidance.
+- `/help` displays the command reference and a safe example workflow.
+- `/authorize <target...> ticket=<id>` approves targets for an engagement.
+- `/scope` displays the active authorization and ticket.
+- `/revoke` clears the active authorization.
+
+For example:
+
+```text
+/authorize example.com ticket=ENG-001
+scan example.com with nmap, ffuf and nuclei, then create a PDF report
+```
+
+Scan only targets you own or are explicitly authorized to assess.
+
 ### Option 2: Kubernetes & Helm
 
 Deploy Reconnator in your Kubernetes cluster (e.g., K3s, Minikube, EKS). *Note: Ensure your node's runtime supports Docker sockets.*

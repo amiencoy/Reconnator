@@ -75,6 +75,25 @@ async def cmd_start(message: types.Message):
     )
 
 
+@dp.message(Command("help"))
+async def cmd_help(message: types.Message):
+    if not await _require_operator(message):
+        return
+    await message.answer(
+        "*Telegram commands*\n"
+        "`/start` — show the initial setup guidance.\n"
+        "`/help` — show this command reference.\n"
+        "`/authorize <target...> ticket=<id>` — approve targets for an engagement.\n"
+        "`/scope` — inspect the active authorization.\n"
+        "`/revoke` — clear the active authorization.\n\n"
+        "*Example workflow*\n"
+        "`/authorize example.com ticket=ENG-001`\n"
+        "`scan example.com with nmap, ffuf and nuclei, then create a PDF report`\n\n"
+        "Scan only targets you own or are explicitly authorized to assess.",
+        parse_mode="Markdown",
+    )
+
+
 @dp.message(Command("authorize"))
 async def cmd_authorize(message: types.Message):
     chat_id = message.chat.id

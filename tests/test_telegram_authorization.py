@@ -7,6 +7,7 @@ import os
 import asyncio
 import unittest
 from types import SimpleNamespace
+from unittest.mock import AsyncMock, patch
 
 os.environ.setdefault("TELEGRAM_BOT_TOKEN", "123456789:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghi")
 os.environ["TELEGRAM_ALLOWED_CHAT_IDS"] = "123,456"
@@ -26,6 +27,30 @@ class TelegramAuthorizationTests(unittest.TestCase):
         )
         self.assertEqual(scope, ("example.com", "192.0.2.0/24"))
         self.assertEqual(ticket, "ENG-42")
+
+
+class TelegramHelpTests(unittest.IsolatedAsyncioTestCase):
+    async def test_operator_receives_command_reference_and_safe_example(self):
+        message = SimpleNamespace(chat=SimpleNamespace(id=123), answer=AsyncMock())
+
+        await bot_module.cmd_help(message)
+
+        message.answer.assert_awaited_once()
+        help_text = message.answer.await_args.args[0]
+        for command in ("/start", "/help", "/authorize", "/scope", "/revoke"):
+            self.assertIn(command, help_text)
+        self.assertIn("/authorize example.com ticket=ENG-001", help_text)
+        self.assertIn("own or are explicitly authorized", help_text)
+
+    async def test_unconfigured_chat_is_refused_help(self):
+        message = SimpleNamespace(chat=SimpleNamespace(id=999), answer=AsyncMock())
+
+        with patch.dict(os.environ, {"TELEGRAM_ALLOWED_CHAT_IDS": "123,456"}):
+            await bot_module.cmd_help(message)
+
+        message.answer.assert_awaited_once_with(
+            "[REFUSED] | This chat is not configured as an operator."
+        )
 
 
 class TelegramParallelWorkflowTests(unittest.IsolatedAsyncioTestCase):

@@ -1,15 +1,15 @@
 # Reconnator traffic
 
-Last successful capture (UTC): **2026-09-10T07:17:05.307513+00:00**
+Last successful capture (UTC): **2026-09-11T07:16:06.959671+00:00**
 
 GitHub rolling 14-day totals, not lifetime totals.
 
 | Metric | Count |
 |---|---:|
-| Views | 824 |
+| Views | 806 |
 | Unique visitors | 22 |
-| Clones | 471 |
-| Unique cloners | 161 |
+| Clones | 480 |
+| Unique cloners | 165 |
 
 Clones may include CI and other automation; unique cloners are not active users.
 Do not sum unique counts across days or overlapping snapshots.

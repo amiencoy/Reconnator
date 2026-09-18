@@ -8,8 +8,8 @@ apiVersion: v2
 name: reconnator
 description: A Cloud-Native, AI-Driven DevSecOps Reconnaissance Tools
 type: application
-version: 2.2.0
-appVersion: "2.2.0"
+version: 2.2.1
+appVersion: "2.2.1"
 keywords:
   - recon
   - bug-bounty

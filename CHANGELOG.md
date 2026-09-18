@@ -7,12 +7,24 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [2.2.1] - 2026-09-11
+
 ### Added
 
+- Automatic Gemini fallback when the primary AI provider is unavailable.
 - Concurrent execution for independent scanner tool calls, with report generation
   deferred until every requested scan completes.
 - Deterministic completion of explicit multi-tool requests when an AI provider
   returns only a partial tool-call plan.
+- Operator-only Telegram `/help` command with a safe workflow example.
+- Telegram ChatOps command documentation and authorization coverage for the help
+  handler.
+
+### Contributors
+
+- Thanks to [@shubhamashish33](https://github.com/shubhamashish33) for the
+  Telegram `/help` command and documentation in
+  [PR #17](https://github.com/amiencoy/Reconnator/pull/17).
 
 ## [2.2.0] - 2026-08-29
 
@@ -102,7 +114,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - Replaced the scheduled passive-reconnaissance flow with an interactive,
   container-native reconnaissance architecture.
 
-[Unreleased]: https://github.com/amiencoy/Reconnator/compare/v2.2.0...HEAD
+[Unreleased]: https://github.com/amiencoy/Reconnator/compare/v2.2.1...HEAD
+[2.2.1]: https://github.com/amiencoy/Reconnator/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/amiencoy/Reconnator/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/amiencoy/Reconnator/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/amiencoy/Reconnator/releases/tag/v2.0.1

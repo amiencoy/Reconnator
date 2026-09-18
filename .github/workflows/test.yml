@@ -75,4 +75,4 @@ jobs:
       - name: Verify packaged runtime and version
         run: |
           docker run --rm --entrypoint python reconnator:test -c \
-            "import sys; sys.path.insert(0, '/app/src'); import agent_core; assert agent_core.__version__ == '2.2.0'; print(agent_core.__version__)"
+            "import sys; sys.path.insert(0, '/app/src'); import agent_core; assert agent_core.__version__ == '2.2.1'; print(agent_core.__version__)"

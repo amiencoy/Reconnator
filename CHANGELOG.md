@@ -7,6 +7,20 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [2.2.2] - 2026-09-23
+
+### Changed
+
+- Updated the MCP Python SDK from 1.29.1 to 1.30.0 while retaining FastMCP
+  3.4.7 and the existing stdio transport.
+- Synchronized runtime, Helm chart, container examples, and CI smoke-check
+  versions for the 2.2.2 patch release.
+
+### Security
+
+- Included upstream MCP 1.x fixes for output-schema reference resolution,
+  same-origin HTTP redirects, OAuth issuer validation, and HTTP session limits.
+
 ## [2.2.1] - 2026-09-11
 
 ### Added
@@ -114,7 +128,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - Replaced the scheduled passive-reconnaissance flow with an interactive,
   container-native reconnaissance architecture.
 
-[Unreleased]: https://github.com/amiencoy/Reconnator/compare/v2.2.1...HEAD
+[Unreleased]: https://github.com/amiencoy/Reconnator/compare/v2.2.2...HEAD
+[2.2.2]: https://github.com/amiencoy/Reconnator/compare/v2.2.1...v2.2.2
 [2.2.1]: https://github.com/amiencoy/Reconnator/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/amiencoy/Reconnator/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/amiencoy/Reconnator/compare/v2.0.1...v2.1.0

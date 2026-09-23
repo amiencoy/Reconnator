@@ -5,7 +5,7 @@
 
 """Security Agent Core public API."""
 
-__version__ = "2.2.1"
+__version__ = "2.2.2"
 
 from .agent import AgentCore, TurnResult
 from .contracts import AuthorizationContext, PolicyConfig, PolicyDecision

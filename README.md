@@ -1,4 +1,4 @@
-# Reconnator traffic
+# Lophiarch traffic
 
 Last successful capture (UTC): **2026-09-24T07:34:40.607995+00:00**
 

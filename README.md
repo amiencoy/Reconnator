@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="assets/reconnator-banner.jpeg" alt="ReconnatoR" width="972">
+  <img src="lophiarch-header.svg" alt="Lophiarch — Formerly Reconnator, v2.2.2" width="972">
 </p>
 
-# Reconnator 2.2.2: The AI Powered Reconnaisance Tool
+## AI-powered reconnaissance
 
-**Reconnator** has evolved. What started as a simple, scheduled passive reconnaissance script is now a fully interactive, AI-driven Reconnaisance assistant. Powered by a provider-agnostic agent core and the Model Context Protocol (MCP), Reconnator can use local or hosted models through an OpenAI-compatible API.
+**Lophiarch** has evolved. What started as a simple, scheduled passive reconnaissance script is now a fully interactive, AI-driven reconnaissance assistant. Powered by a provider-agnostic agent core and the Model Context Protocol (MCP), Lophiarch can use local or hosted models through an OpenAI-compatible API.
 
 It orchestrates vulnerability scanning, dynamically routes tools, and seamlessly integrates into modern infrastructure (Docker/Kubernetes) using a container-native architecture.
 
@@ -29,7 +29,7 @@ It orchestrates vulnerability scanning, dynamically routes tools, and seamlessly
 
 ## 📊 Repository traffic
 
-See the [public traffic archive](https://github.com/amiencoy/Reconnator/tree/traffic-data)
+See the [public traffic archive](https://github.com/amiencoy/lophiarch/tree/traffic-data)
 for timestamped GitHub traffic snapshots after the first successful collection.
 The [initial screenshot baseline](docs/traffic-baseline.json) covers August 23–September 5, 2026:
 **758 views, 26 unique visitors, 401 clones, and 141 unique cloners**.
@@ -39,29 +39,29 @@ See [collection and methodology](docs/TRAFFIC.md).
 ## 📚 Documentation
 
 The complete operational and development documentation is available in the
-[Reconnator Wiki](https://github.com/amiencoy/Reconnator/wiki).
+[Lophiarch Wiki](https://github.com/amiencoy/lophiarch/wiki).
 
 Start with:
 
-- [Getting Started](https://github.com/amiencoy/Reconnator/wiki/Getting-Started)
-- [Architecture Overview](https://github.com/amiencoy/Reconnator/wiki/Architecture-Overview)
-- [Deployment](https://github.com/amiencoy/Reconnator/wiki/Deployment)
-- [Security and Responsible Use](https://github.com/amiencoy/Reconnator/wiki/Security-and-Responsible-Use)
-- [Troubleshooting](https://github.com/amiencoy/Reconnator/wiki/Troubleshooting)
+- [Getting Started](https://github.com/amiencoy/lophiarch/wiki/Getting-Started)
+- [Architecture Overview](https://github.com/amiencoy/lophiarch/wiki/Architecture-Overview)
+- [Deployment](https://github.com/amiencoy/lophiarch/wiki/Deployment)
+- [Security and Responsible Use](https://github.com/amiencoy/lophiarch/wiki/Security-and-Responsible-Use)
+- [Troubleshooting](https://github.com/amiencoy/lophiarch/wiki/Troubleshooting)
 - [Local and Self-Hosted Models](docs/LOCAL_MODELS.md)
 
 ---
 
 ## Quick Start
 
-Ensure you have supported Python 3.11 or 3.14 installed and the **Docker Engine** running on your host (Reconnator needs access to the Docker daemon to spawn its tools' containers).
+Ensure you have supported Python 3.11 or 3.14 installed and the **Docker Engine** running on your host (Lophiarch needs access to the Docker daemon to spawn its tools' containers).
 
 ### Option 1: Running Locally (Docker-out-of-Docker)
 
 ```bash
 # Clone the repository
-git clone [https://github.com/yourusername/reconnator.git](https://github.com/yourusername/reconnator.git)
-cd reconnator
+git clone https://github.com/amiencoy/lophiarch.git
+cd lophiarch
 
 # Setup Environment Variables (Rename the example file)
 cp .env.example .env
@@ -69,7 +69,7 @@ cp .env.example .env
 # Edit .env. Configure Telegram plus your selected local or hosted AI provider.
 nano .env
 
-# Build the main Reconnator bot image
+# Build the main Lophiarch bot image
 docker build -t reconnator:2.2.2 .
 
 # Run the Bot 24/7 (CRITICAL: Mount the docker.sock!)
@@ -110,7 +110,7 @@ Scan only targets you own or are explicitly authorized to assess.
 
 ### Option 2: Kubernetes & Helm
 
-Deploy Reconnator in your Kubernetes cluster (e.g., K3s, Minikube, EKS). *Note: Ensure your node's runtime supports Docker sockets.*
+Deploy Lophiarch in your Kubernetes cluster (e.g., K3s, Minikube, EKS). *Note: Ensure your node's runtime supports Docker sockets.*
 
 ```bash
 # Navigate to the Helm directory
@@ -138,7 +138,7 @@ helm install recon-bot . \
 │   ├── agent_core/       # Provider, MCP, prompt, and policy runtime
 │   ├── config/           # Agent policy-as-code
 │   ├── modules/          # Ephemeral Engines (nmap, ffuf, nuclei, subfinder, otx, report)
-│   ├── modules/agent_core.py # Reconnator consumer adapter
+│   ├── modules/agent_core.py # Lophiarch consumer adapter
 │   ├── mcp_server.py     # The Arsenal: MCP tool registration & schema mapping
 │   └── bot.py            # The Mouth & Ears: Telegram ChatOps entrypoint
 ├── Dockerfile            # Main Alpine-based bot container
@@ -173,9 +173,9 @@ read the [Contributing Guidelines](CONTRIBUTING.md) and
 Do not report vulnerabilities through public issues. Follow the
 [Security Policy](SECURITY.md) for private disclosure.
 
-## 💖 Support Reconnator
+## 💖 Support Lophiarch
 
-Reconnator is developed and maintained as an open-source project. Sponsorships help support ongoing maintenance, security-tool integrations, testing, documentation, and future releases.
+Lophiarch is developed and maintained as an open-source project. Sponsorships help support ongoing maintenance, security-tool integrations, testing, documentation, and future releases.
 
 [![Sponsor on GitHub](https://img.shields.io/badge/Sponsor-GitHub%20Sponsors-ea4aaa?logo=githubsponsors)](https://github.com/sponsors/amiencoy)
 
@@ -183,13 +183,13 @@ Sponsorship supports the project's open-source development and does not include 
 
 ## 📦 Releases and Versioning
 
-Reconnator follows [Semantic Versioning](https://semver.org/). The current
-release is **v2.2.2**. See the [GitHub Releases](https://github.com/amiencoy/Reconnator/releases),
+Lophiarch follows [Semantic Versioning](https://semver.org/). The current
+release is **v2.2.2**. See the [GitHub Releases](https://github.com/amiencoy/lophiarch/releases),
 [Changelog](CHANGELOG.md), and [Release Guide](RELEASING.md) for details.
 
 ## 📄 License
 
-Reconnator is dual-licensed under either the [MIT License](LICENSE-MIT) or the [Apache License 2.0](LICENSE-APACHE), at your option. See [LICENSE](LICENSE) for the dual-license declaration.
+Lophiarch is dual-licensed under either the [MIT License](LICENSE-MIT) or the [Apache License 2.0](LICENSE-APACHE), at your option. See [LICENSE](LICENSE) for the dual-license declaration.
 
 SPDX license expression: `MIT OR Apache-2.0`.
 

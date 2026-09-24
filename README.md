@@ -200,6 +200,4 @@ SPDX license expression: `MIT OR Apache-2.0`.
 ---
 
 
-<p align="center">
-  <i><small>Built with code and coffee by amiencoy</small></i>
-</p>
+<p align="center"><sub>Built with code, coffee, and a healthy dislike of repetitive work.</sub></p>

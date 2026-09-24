@@ -52,3 +52,7 @@ ghcr.io/amiencoy/lophiarch:latest
 
 Do not move or reuse a published version tag. If a release needs correction,
 publish a new patch version.
+
+---
+
+<p align="center"><sub>Built with code, coffee, and a healthy dislike of repetitive work.</sub></p>

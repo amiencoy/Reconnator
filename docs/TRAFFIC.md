@@ -39,3 +39,7 @@ It has no referrer data, and its exact capture time is unknown. It is not lifeti
 
 All archived traffic, including referrers and popular paths, is public by design.
 Source: https://docs.github.com/en/rest/metrics/traffic
+
+---
+
+<p align="center"><sub>Built with code, coffee, and a healthy dislike of repetitive work.</sub></p>

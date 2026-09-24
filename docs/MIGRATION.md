@@ -37,3 +37,7 @@ published tag for production. No workloads are migrated automatically.
 Update integrations that match the MCP identity to `LophiarchCore`, scanner image
 names to `lophiarch-*`, and PDF filename patterns to `Lophiarch_Report_*.pdf`.
 Existing report files, secrets, scope approvals, and Git release tags are not renamed.
+
+---
+
+<p align="center"><sub>Built with code, coffee, and a healthy dislike of repetitive work.</sub></p>

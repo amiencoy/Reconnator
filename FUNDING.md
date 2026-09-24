@@ -27,3 +27,7 @@ You can support Lophiarch through
 Funding supports project maintenance and infrastructure. It does not override
 authorization requirements, Agent Policy-as-Code, or Lophiarch's responsible-use
 and default-deny security boundaries.
+
+---
+
+<p align="center"><sub>Built with code, coffee, and a healthy dislike of repetitive work.</sub></p>

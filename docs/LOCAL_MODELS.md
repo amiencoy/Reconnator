@@ -101,3 +101,7 @@ eliminate hallucinations. Lophiarch therefore filters tool schemas through an
 allowlist and validates approval plus target scope before any MCP call executes.
 
 Increase `AI_TIMEOUT_SECONDS` when a local model needs more time for its initial load.
+
+---
+
+<p align="center"><sub>Built with code, coffee, and a healthy dislike of repetitive work.</sub></p>

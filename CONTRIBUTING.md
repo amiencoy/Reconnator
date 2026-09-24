@@ -142,3 +142,7 @@ Lophiarch is available under your choice of the
 Unless you explicitly state otherwise, contributions intentionally submitted for
 inclusion in Lophiarch are provided under the same dual-license expression:
 `MIT OR Apache-2.0`, without additional terms or conditions.
+
+---
+
+<p align="center"><sub>Built with code, coffee, and a healthy dislike of repetitive work.</sub></p>

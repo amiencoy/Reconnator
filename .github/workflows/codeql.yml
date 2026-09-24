@@ -1,5 +1,5 @@
 # ==================================================================================== #
-# This workflow performs CodeQL static analysis on Reconnator's Python codebase.       #
+# This workflow performs CodeQL static analysis on Lophiarch's Python codebase.       #
 # It detects security-relevant code patterns on protected branches and pull requests. #
 # ==================================================================================== #
 

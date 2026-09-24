@@ -1,11 +1,11 @@
 # ==================================================================================== #
-# This adapter connects legacy Reconnator imports to the provider-agnostic agent core. #
+# This adapter connects legacy Lophiarch imports to the provider-agnostic agent core. #
 # It preserves existing consumers while removing the former Gemini-only dependency.  #
 # ==================================================================================== #
 
-"""Reconnator consumer for the provider-agnostic security agent core.
+"""Lophiarch consumer for the provider-agnostic security agent core.
 
-Product concerns stay in Reconnator. Provider selection, MCP transport, prompt
+Product concerns stay in Lophiarch. Provider selection, MCP transport, prompt
 contracts, and runtime policy live in ``src/agent_core``.
 """
 

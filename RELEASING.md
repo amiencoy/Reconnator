@@ -1,6 +1,6 @@
-# Releasing Reconnator
+# Releasing Lophiarch
 
-Reconnator follows [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html).
+Lophiarch follows [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html).
 The version itself is written as `MAJOR.MINOR.PATCH`; Git tags add a leading
 `v`, for example `v2.2.2`.
 
@@ -25,14 +25,14 @@ can ship together in one patch release.
 
    ```bash
    python -m compileall src
-   docker build -t reconnator:release-candidate .
+   docker build -t lophiarch:release-candidate .
    helm lint deploy/helm
    ```
 
 5. Create and push an annotated tag:
 
    ```bash
-   git tag -a v2.2.2 -m "Reconnator v2.2.2"
+   git tag -a v2.2.2 -m "Lophiarch v2.2.2"
    git push origin v2.2.2
    ```
 
@@ -40,14 +40,14 @@ can ship together in one patch release.
    stable release as the latest release.
 7. Verify the GitHub Actions run and the corresponding GHCR image tags.
 
-Stable version tags trigger container publishing. For `v2.2.2`, the expected
-image aliases are:
+New stable version tags trigger container publishing under the Lophiarch name.
+For a future `vX.Y.Z` release, the expected image aliases are:
 
 ```text
-ghcr.io/amiencoy/reconnator:2.2.2
-ghcr.io/amiencoy/reconnator:2.2
-ghcr.io/amiencoy/reconnator:2
-ghcr.io/amiencoy/reconnator:latest
+ghcr.io/amiencoy/lophiarch:X.Y.Z
+ghcr.io/amiencoy/lophiarch:X.Y
+ghcr.io/amiencoy/lophiarch:X
+ghcr.io/amiencoy/lophiarch:latest
 ```
 
 Do not move or reuse a published version tag. If a release needs correction,

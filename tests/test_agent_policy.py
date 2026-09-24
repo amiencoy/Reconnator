@@ -1,6 +1,6 @@
 # ==================================================================================== #
 # These tests verify target authorization, approval requirements, and policy limits.  #
-# They ensure model output cannot bypass Reconnator's runtime security boundary.      #
+# They ensure model output cannot bypass Lophiarch's runtime security boundary.      #
 # ==================================================================================== #
 
 import unittest

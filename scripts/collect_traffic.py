@@ -27,7 +27,7 @@ def fetch(repository, token, endpoint):
         headers={'Authorization': f'Bearer {token}',
                  'Accept': 'application/vnd.github+json',
                  'X-GitHub-Api-Version': '2026-03-10',
-                 'User-Agent': 'Reconnator-traffic-archive'},
+                 'User-Agent': 'Lophiarch-traffic-archive'},
     )
     with urlopen(request, timeout=30) as response:
         return json.load(response)
@@ -64,7 +64,7 @@ def publish_output(data, repository, output, now):
     name = now.strftime('%Y-%m-%dT%H-%M-%S-%fZ') + '.json'
     (archive / name).write_text(encoded, encoding='utf-8')
     (output / 'latest.json').write_text(encoded, encoding='utf-8')
-    lines = ['# Reconnator traffic', '',
+    lines = ['# Lophiarch traffic', '',
              f'Last successful capture (UTC): **{now.isoformat()}**', '',
              'GitHub rolling 14-day totals, not lifetime totals.', '',
              '| Metric | Count |', '|---|---:|',

@@ -3,7 +3,7 @@
 ## Our Pledge
 
 We, as contributors, maintainers, and community members, pledge to make participation
-in the Reconnator project a welcoming, safe, and respectful experience for everyone.
+in the Lophiarch project a welcoming, safe, and respectful experience for everyone.
 
 We are committed to an environment that respects the dignity, rights, perspectives,
 and contributions of all people, regardless of age, body size, disability,
@@ -33,7 +33,7 @@ Examples of behavior that supports a healthy project community include:
 
 ## Unacceptable Behavior
 
-The following behaviors are not acceptable in Reconnator community spaces:
+The following behaviors are not acceptable in Lophiarch community spaces:
 
 - Harassment, intimidation, stalking, or repeated unwanted contact.
 - Insults, personal attacks, threats, trolling, or deliberately inflammatory
@@ -55,7 +55,7 @@ The following behaviors are not acceptable in Reconnator community spaces:
 
 ## Security Research and Responsible Use
 
-Reconnator is intended for authorized reconnaissance and security assessment.
+Lophiarch is intended for authorized reconnaissance and security assessment.
 Technical discussions and contributions must not be used to coordinate
 unauthorized access, exploitation, destructive testing, harassment, or harm.
 
@@ -68,11 +68,11 @@ defines the behavioral expectations for participating in the project community.
 
 ## Scope
 
-This Code of Conduct applies in all official Reconnator community spaces,
+This Code of Conduct applies in all official Lophiarch community spaces,
 including the repository, issues, pull requests, code reviews, discussions,
 documentation, and project-managed communication channels.
 
-It also applies when someone officially represents Reconnator in public, such as
+It also applies when someone officially represents Lophiarch in public, such as
 through an official account, email address, event, presentation, or other
 appointed role.
 

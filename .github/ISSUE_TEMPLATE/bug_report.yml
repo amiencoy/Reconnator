@@ -4,7 +4,7 @@
 # ==================================================================================== #
 
 name: Bug report
-description: Report a reproducible problem in Reconnator
+description: Report a reproducible problem in Lophiarch
 title: "[Bug]: "
 labels:
   - bug
@@ -19,9 +19,9 @@ body:
   - type: input
     id: version
     attributes:
-      label: Reconnator version
+      label: Lophiarch version
       description: Provide a release, image tag, or commit SHA.
-      placeholder: "Example: main at 70ca97b or ghcr.io/amiencoy/reconnator:sha-70ca97b"
+      placeholder: "Example: main at 70ca97b or ghcr.io/amiencoy/lophiarch:sha-70ca97b"
     validations:
       required: true
 

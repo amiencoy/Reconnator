@@ -1,5 +1,5 @@
 # ==================================================================================== #
-# This validator enforces Reconnator's explanatory banner on Python and YAML files.   #
+# This validator enforces Lophiarch's explanatory banner on Python and YAML files.   #
 # CI exits with a readable file list when a tracked source or config omits the banner. #
 # ==================================================================================== #
 
@@ -44,10 +44,10 @@ def main() -> int:
     repository_root = Path(__file__).resolve().parents[1]
     missing = missing_banners(tracked_files(repository_root))
     if not missing:
-        print("All tracked Python and YAML files contain a Reconnator feature banner.")
+        print("All tracked Python and YAML files contain a Lophiarch feature banner.")
         return 0
 
-    print("Missing Reconnator feature banner on the first line:", file=sys.stderr)
+    print("Missing Lophiarch feature banner on the first line:", file=sys.stderr)
     for path in missing:
         print(f"  - {path.relative_to(repository_root)}", file=sys.stderr)
     print(

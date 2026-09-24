@@ -29,7 +29,7 @@ async def run_nuclei(targets: list) -> list:
     
     cmd = [
         "docker", "run", "--rm", 
-        "reconnator-nuclei:latest",
+        "lophiarch-nuclei:latest",
         "-u", target_string, 
         "-silent", 
         "-jsonl",

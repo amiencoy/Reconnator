@@ -71,8 +71,8 @@ jobs:
       - uses: actions/checkout@v7
       - uses: docker/setup-buildx-action@v4
       - name: Build release image
-        run: docker build --tag reconnator:test .
+        run: docker build --tag lophiarch:test .
       - name: Verify packaged runtime and version
         run: |
-          docker run --rm --entrypoint python reconnator:test -c \
+          docker run --rm --entrypoint python lophiarch:test -c \
             "import sys; sys.path.insert(0, '/app/src'); import agent_core; assert agent_core.__version__ == '2.2.2'; print(agent_core.__version__)"

@@ -1,7 +1,7 @@
 # ==================================================================================== #
-# GitHub Actions Workflow for Reconnator: Automated Docker Image Publish.              #
+# GitHub Actions Workflow for Lophiarch: Automated Docker Image Publish.              #
 # This pipeline runs on relevant main changes, SemVer tags, or manual dispatch.        #
-# It builds the Reconnator image and publishes it to GitHub Container Registry (ghcr). #
+# It builds the Lophiarch image and publishes it to GitHub Container Registry (ghcr). #
 # Note: Ensure you have granted the repository permissions to write to packages.       #
 # ==================================================================================== #
 

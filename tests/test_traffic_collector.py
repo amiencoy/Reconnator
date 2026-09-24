@@ -26,7 +26,7 @@ class TrafficTests(unittest.TestCase):
     def test_preserves_window_uniques_and_multiple_snapshots(self):
         with tempfile.TemporaryDirectory() as folder:
             for day in (3, 4):
-                collector.publish_output(self.fixture(), 'amiencoy/Reconnator', folder,
+                collector.publish_output(self.fixture(), 'amiencoy/lophiarch', folder,
                                          datetime(2026, 9, day, tzinfo=timezone.utc))
             self.assertEqual(len(list((Path(folder) / 'snapshots').glob('*.json'))), 2)
             latest = json.loads((Path(folder) / 'latest.json').read_text())
@@ -40,7 +40,7 @@ class TrafficTests(unittest.TestCase):
             invalid = self.fixture()
             invalid['clones']['count'] = -1
             with self.assertRaises(ValueError):
-                collector.publish_output(invalid, 'amiencoy/Reconnator', folder,
+                collector.publish_output(invalid, 'amiencoy/lophiarch', folder,
                                          datetime.now(timezone.utc))
             self.assertEqual(target.read_text(), 'previous snapshot')
             self.assertFalse((Path(folder) / 'snapshots').exists())

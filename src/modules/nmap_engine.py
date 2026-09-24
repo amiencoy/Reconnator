@@ -39,7 +39,7 @@ async def run_nmap(targets: list, scan_mode: str = "default") -> str:
         
     cmd = [
         "docker", "run", "--rm", 
-        "reconnator-nmap:latest"
+        "lophiarch-nmap:latest"
     ] + nmap_flags + list(clean_targets)
     
     try:

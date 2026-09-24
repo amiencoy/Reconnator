@@ -52,6 +52,10 @@ Start with:
 
 ---
 
+## Migration
+
+See [migration notes](docs/MIGRATION.md) before upgrading an existing deployment.
+
 ## Quick Start
 
 Ensure you have supported Python 3.11 or 3.14 installed and the **Docker Engine** running on your host (Lophiarch needs access to the Docker daemon to spawn its tools' containers).
@@ -70,15 +74,15 @@ cp .env.example .env
 nano .env
 
 # Build the main Lophiarch bot image
-docker build -t reconnator:2.2.2 .
+docker build -t lophiarch:2.2.2 .
 
 # Run the Bot 24/7 (CRITICAL: Mount the docker.sock!)
 docker run -d \
-  --name reconnator-bot \
+  --name lophiarch-bot \
   --add-host=host.docker.internal:host-gateway \
   -v /var/run/docker.sock:/var/run/docker.sock \
   --env-file .env \
-  reconnator:2.2.2
+  lophiarch:2.2.2
 
 ```
 

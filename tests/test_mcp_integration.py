@@ -11,7 +11,7 @@ from agent_core.mcp import StdioMCPAdapter
 
 
 class MCPIntegrationTests(unittest.IsolatedAsyncioTestCase):
-    async def test_stdio_server_exposes_only_expected_reconnator_tools(self):
+    async def test_stdio_server_exposes_only_expected_lophiarch_tools(self):
         server = Path(__file__).resolve().parents[1] / "src" / "mcp_server.py"
         adapter = StdioMCPAdapter(server)
         try:

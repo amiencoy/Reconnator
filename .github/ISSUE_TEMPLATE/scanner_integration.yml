@@ -12,7 +12,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Reconnator integrations must have a clear reconnaissance or defensive
+        Lophiarch integrations must have a clear reconnaissance or defensive
         security purpose, support containerized execution where practical, and
         preserve explicit authorization boundaries.
 

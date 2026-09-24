@@ -5,7 +5,7 @@
 # parallel-friendly tools: Subdomain Recon, Nmap, Ffuf, Nuclei, and PDF Generation.        #
 # ======================================================================================== #
 
-reconnator_tools = [
+lophiarch_tools = [
     {
         "type": "function",
         "function": {

@@ -1,6 +1,6 @@
-# Funding Reconnator
+# Funding Lophiarch
 
-Reconnator is an open-source, policy-gated reconnaissance automation project.
+Lophiarch is an open-source, policy-gated reconnaissance automation project.
 Sponsorship helps keep its development, testing, documentation, and supporting
 infrastructure sustainable without weakening its responsible-use boundaries.
 
@@ -10,7 +10,7 @@ Funding and sponsorship will be directed toward:
 
 1. **CI/CD and security scanning** — maintaining reliable build, test, supply-chain,
    vulnerability, and code-scanning pipelines.
-2. **Infrastructure testing** — validating Reconnator across supported container,
+2. **Infrastructure testing** — validating Lophiarch across supported container,
    local-model, and deployment environments.
 3. **Managed scanner workers** — operating isolated, ephemeral workers for scalable
    and policy-controlled reconnaissance workloads.
@@ -21,9 +21,9 @@ Funding and sponsorship will be directed toward:
 
 ## Support the project
 
-You can support Reconnator through
+You can support Lophiarch through
 [GitHub Sponsors](https://github.com/sponsors/amiencoy).
 
 Funding supports project maintenance and infrastructure. It does not override
-authorization requirements, Agent Policy-as-Code, or Reconnator's responsible-use
+authorization requirements, Agent Policy-as-Code, or Lophiarch's responsible-use
 and default-deny security boundaries.

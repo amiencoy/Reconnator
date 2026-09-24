@@ -5,9 +5,10 @@
 # ============================================================================================================================================ #
 
 image:
-  repository: ghcr.io/amiencoy/reconnator
-  tag: "2.2.2"
-  pullPolicy: IfNotPresent
+  repository: ghcr.io/amiencoy/lophiarch
+  tag: "latest"
+  # For reproducible deployments, set a verified sha-<commit> or published version tag.
+  pullPolicy: Always
 
 podSecurityContext:
   runAsUser: 65532
@@ -26,7 +27,7 @@ telegram:
 ai:
   provider: ollama
   model: qwen3:8b
-  # Use a Kubernetes Service URL here. localhost points to the Reconnator pod.
+  # Use a Kubernetes Service URL here. localhost points to the Lophiarch pod.
   baseUrl: http://ollama.default.svc.cluster.local:11434/v1/chat/completions
   temperature: "0"
   timeoutSeconds: "300"

@@ -19,7 +19,7 @@ concurrency:
 
 jobs:
   archive:
-    if: github.repository == 'amiencoy/Reconnator' && github.ref == 'refs/heads/main'
+    if: github.repository == 'amiencoy/lophiarch' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

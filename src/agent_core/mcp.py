@@ -33,7 +33,7 @@ class StdioMCPAdapter:
             from mcp import ClientSession, StdioServerParameters
             from mcp.client.stdio import stdio_client
         except ImportError as exc:
-            raise RuntimeError("the `mcp` package is required for Reconnator's agent runtime") from exc
+            raise RuntimeError("the `mcp` package is required for Lophiarch's agent runtime") from exc
 
         params = StdioServerParameters(command=self.command, args=[self.server_script])
         read, write = await self._stack.enter_async_context(stdio_client(params))

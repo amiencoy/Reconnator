@@ -1,9 +1,9 @@
 # ==================================================================================== #
-# This is Reconnator's Telegram ChatOps entrypoint and user-facing command controller. #
+# This is Lophiarch's Telegram ChatOps entrypoint and user-facing command controller. #
 # It authorizes chats, invokes the policy-gated agent core, and returns scan results.  #
 # ==================================================================================== #
 
-"""Telegram ChatOps consumer for Reconnator's policy-gated agent core."""
+"""Telegram ChatOps consumer for Lophiarch's policy-gated agent core."""
 
 from __future__ import annotations
 
@@ -68,7 +68,7 @@ async def cmd_start(message: types.Message):
     if not await _require_operator(message):
         return
     await message.answer(
-        "*Reconnator enabled.*\n"
+        "*Lophiarch enabled.*\n"
         "Use `/authorize <target...> ticket=<id>` before active scans.\n"
         "Use `/scope` to inspect authorization and `/revoke` when finished.",
         parse_mode="Markdown",
@@ -243,7 +243,7 @@ async def handle_user_message(message: types.Message):
 
 
 async def main():
-    logger.info("Provider-agnostic Reconnator is running")
+    logger.info("Provider-agnostic Lophiarch is running")
     try:
         await dp.start_polling(bot)
     finally:

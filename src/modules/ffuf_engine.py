@@ -30,7 +30,7 @@ async def run_ffuf(targets: list, scan_mode: str = "default") -> str:
         
         cmd = [
             "docker", "run", "--rm", 
-            "reconnator-ffuf:latest",
+            "lophiarch-ffuf:latest",
             "-w", wordlist,
             "-u", fuzz_url,
             "-t", "50",

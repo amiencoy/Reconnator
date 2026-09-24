@@ -1,6 +1,6 @@
 # Local and Self-Hosted AI Providers
 
-Reconnator uses an OpenAI-compatible chat-completions contract. Gemini remains an
+Lophiarch uses an OpenAI-compatible chat-completions contract. Gemini remains an
 optional provider, but the default configuration runs Qwen through Ollama.
 
 ## Optional Gemini fallback
@@ -12,7 +12,7 @@ GEMINI_API_KEY=your-google-ai-studio-key
 GEMINI_MODEL=gemini-3.5-flash-lite
 ```
 
-The key's presence opts in to automatic failover. Reconnator calls Gemini only when
+The key's presence opts in to automatic failover. Lophiarch calls Gemini only when
 the primary provider cannot connect, times out, returns an HTTP error, or produces an
 invalid chat-completions response. If a custom provider is selected but its endpoint
 or model is missing, Gemini starts directly. When the primary provider is healthy,
@@ -29,7 +29,7 @@ ollama pull qwen3:8b
 ollama serve
 ```
 
-When Reconnator runs directly on the same host:
+When Lophiarch runs directly on the same host:
 
 ```dotenv
 AI_PROVIDER=ollama
@@ -40,7 +40,7 @@ AI_TEMPERATURE=0
 AI_TIMEOUT_SECONDS=300
 ```
 
-When Reconnator runs in Docker, use the host gateway:
+When Lophiarch runs in Docker, use the host gateway:
 
 ```dotenv
 AI_BASE_URL=http://host.docker.internal:11434/v1/chat/completions
@@ -97,7 +97,7 @@ that only returns prose can still answer questions, but cannot reliably invoke M
 tools. Keep `AI_TEMPERATURE=0` for more deterministic tool arguments.
 
 Local inference improves privacy and removes a hosted-provider dependency. It does not
-eliminate hallucinations. Reconnator therefore filters tool schemas through an
+eliminate hallucinations. Lophiarch therefore filters tool schemas through an
 allowlist and validates approval plus target scope before any MCP call executes.
 
 Increase `AI_TIMEOUT_SECONDS` when a local model needs more time for its initial load.

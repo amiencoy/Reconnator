@@ -24,7 +24,7 @@ async def generate_scan_report(scan_memory: dict, format_type: str = "pdf") -> s
     current_time = time.strftime("%Y-%m-%d %H:%M:%S")
     
     os.makedirs("generated_reports", exist_ok=True)
-    filename = f"generated_reports/Reconnator_Report_{report_id}.pdf"
+    filename = f"generated_reports/Lophiarch_Report_{report_id}.pdf"
     
     doc = SimpleDocTemplate(
         filename, 
@@ -83,7 +83,7 @@ async def generate_scan_report(scan_memory: dict, format_type: str = "pdf") -> s
         leading=10
     )
 
-    story.append(Paragraph("RECONNATOR VULNERABILITY REPORT", title_style))
+    story.append(Paragraph("LOPHIARCH VULNERABILITY REPORT", title_style))
     story.append(HRFlowable(width="100%", thickness=1, color=colors.HexColor("#C80000"), spaceAfter=15))
     story.append(Paragraph(" SCAN METADATA SUMMARY", meta_head_style))
     story.append(Spacer(1, 5))

@@ -1,13 +1,13 @@
 # Public repository traffic
 
-[Open the traffic dashboard](https://github.com/amiencoy/Reconnator/tree/traffic-data)
+[Open the traffic dashboard](https://github.com/amiencoy/lophiarch/tree/traffic-data)
 after the first successful collection. That public branch contains a generated
 README, latest.json, timestamped snapshots, and the manual baseline.
 
 ## Setup and first run
 
 1. Store a fine-grained PAT as the repository Actions secret REPO_TRAFFIC_TOKEN.
-   Select only Reconnator and grant Administration: read. Do not give it write access.
+   Select only Lophiarch and grant Administration: read. Do not give it write access.
 2. Merge the collector workflow into main.
 3. Open Actions > Archive repository traffic > Run workflow, selecting main.
 4. Verify both collection and publication succeeded, then open traffic-data.

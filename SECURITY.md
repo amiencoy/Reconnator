@@ -20,10 +20,10 @@ discussion, social-media post, or other public channel.
 Use one of these private reporting methods:
 
 1. If the repository displays **Report a vulnerability**, submit a
-   [private vulnerability report](https://github.com/amiencoy/Reconnator/security/advisories/new).
+   [private vulnerability report](https://github.com/amiencoy/lophiarch/security/advisories/new).
 2. Otherwise, email the maintainer at
    [mamien131@gmail.com](mailto:mamien131@gmail.com) with the subject
-   `[SECURITY][Reconnator] Short description`.
+   `[SECURITY][Lophiarch] Short description`.
 
 Include as much of the following information as possible:
 
@@ -38,28 +38,28 @@ Use only systems and targets you own or are explicitly authorized to test.
 Avoid destructive testing, service disruption, privacy violations, persistence,
 or access to data beyond what is necessary to demonstrate the issue.
 
-## What Qualifies as a Reconnator Vulnerability
+## What Qualifies as a Lophiarch Vulnerability
 
 Examples include:
 
-- Command or argument injection through Reconnator input handling.
+- Command or argument injection through Lophiarch input handling.
 - Unauthorized scan execution or bypass of intended authorization controls.
 - Exposure of Telegram tokens, Gemini API keys, reports, or target data.
 - Unsafe interaction with the mounted Docker socket that expands privileges
-  beyond Reconnator's documented behavior.
+  beyond Lophiarch's documented behavior.
 - A dependency or container supply-chain issue with a demonstrated impact on
-  Reconnator users.
+  Lophiarch users.
 - A flaw in report generation, MCP tool routing, or scanner orchestration that
   creates a security boundary violation.
 
-The following should not be reported as Reconnator vulnerabilities:
+The following should not be reported as Lophiarch vulnerabilities:
 
-- Vulnerabilities discovered in a third-party target scanned by Reconnator.
+- Vulnerabilities discovered in a third-party target scanned by Lophiarch.
 - Normal Nmap, Nuclei, Ffuf, Subfinder, dnsx, or OTX findings.
 - General product support requests, configuration mistakes, or feature requests.
 - Findings that require unauthorized testing of systems you do not control.
 - Vulnerabilities in an outdated third-party component without a demonstrated
-  impact on a supported Reconnator version.
+  impact on a supported Lophiarch version.
 
 ## Response and Disclosure Process
 

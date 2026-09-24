@@ -1,6 +1,6 @@
-# Contributing to Reconnator
+# Contributing to Lophiarch
 
-Thank you for helping improve Reconnator. Contributions can include code,
+Thank you for helping improve Lophiarch. Contributions can include code,
 documentation, tests, bug reports, integration proposals, and reviews.
 
 By participating, you agree to follow the
@@ -9,7 +9,7 @@ privately according to the [Security Policy](SECURITY.md).
 
 ## Security and Authorization
 
-Reconnator is a security reconnaissance tool. Develop and test only against
+Lophiarch is a security reconnaissance tool. Develop and test only against
 systems you own or are explicitly authorized to assess.
 
 Do not include real credentials, API keys, private reports, customer data,
@@ -40,8 +40,8 @@ Prerequisites:
 Fork the repository and prepare a local environment:
 
 ```bash
-git clone https://github.com/<your-username>/Reconnator.git
-cd Reconnator
+git clone https://github.com/<your-username>/lophiarch.git
+cd lophiarch
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
@@ -61,15 +61,15 @@ Use development-only Telegram and Gemini credentials. Never commit the resulting
 The main container can be built with:
 
 ```bash
-docker build -t reconnator:test .
+docker build -t lophiarch:test .
 ```
 
 When modifying a scanner worker, build only the affected image:
 
 ```bash
-docker build -f Dockerfile.nmap -t reconnator-nmap:latest .
-docker build -f Dockerfile.ffuf -t reconnator-ffuf:latest .
-docker build -f Dockerfile.nuclei -t reconnator-nuclei:latest .
+docker build -f Dockerfile.nmap -t lophiarch-nmap:latest .
+docker build -f Dockerfile.ffuf -t lophiarch-ffuf:latest .
+docker build -f Dockerfile.nuclei -t lophiarch-nuclei:latest .
 ```
 
 ## Branches and Commits
@@ -106,7 +106,7 @@ run the checks relevant to your change and document the results:
 
 ```bash
 python -m compileall src
-docker build -t reconnator:test .
+docker build -t lophiarch:test .
 ```
 
 For Helm changes:
@@ -136,9 +136,9 @@ large pull request be split into smaller changes.
 
 ## Licensing
 
-Reconnator is available under your choice of the
+Lophiarch is available under your choice of the
 [MIT License](LICENSE-MIT) or the [Apache License 2.0](LICENSE-APACHE).
 
 Unless you explicitly state otherwise, contributions intentionally submitted for
-inclusion in Reconnator are provided under the same dual-license expression:
+inclusion in Lophiarch are provided under the same dual-license expression:
 `MIT OR Apache-2.0`, without additional terms or conditions.

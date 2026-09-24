@@ -1,10 +1,10 @@
 # ==================================================================================== #
-# This policy declares Reconnator's allowed tools, targets, approvals, and limits.    #
+# This policy declares Lophiarch's allowed tools, targets, approvals, and limits.    #
 # Runtime enforcement reads these values instead of trusting AI prompt instructions.  #
 # ==================================================================================== #
 
 agent:
-  name: Reconnator Security Agent
+  name: Lophiarch Security Agent
   domain: authorized defensive cybersecurity and DevSecOps operations
 
 authorization:

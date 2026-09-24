@@ -1,11 +1,17 @@
 # Changelog
 
-All notable changes to Reconnator are documented in this file.
+All notable changes to Lophiarch are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+### Changed
+
+- Completed Lophiarch branding across runtime, PDF output, scanner images, Helm, CI, and documentation.
+- Fixed the traffic workflow repository guard after the rename.
+- Added deployment migration guidance; existing release tags remain unchanged.
 
 ## [2.2.2] - 2026-09-23
 
@@ -38,7 +44,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 - Thanks to [@shubhamashish33](https://github.com/shubhamashish33) for the
   Telegram `/help` command and documentation in
-  [PR #17](https://github.com/amiencoy/Reconnator/pull/17).
+  [PR #17](https://github.com/amiencoy/lophiarch/pull/17).
 
 ## [2.2.0] - 2026-08-29
 
@@ -85,7 +91,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Added
 
-- GitHub Container Registry publishing for the main Reconnator image.
+- GitHub Container Registry publishing for the main Lophiarch image.
 - Security policy, contribution guidelines, Contributor Covenant, issue forms,
   and a pull request template.
 - GitHub Sponsors configuration and project sponsorship guidance.
@@ -128,10 +134,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - Replaced the scheduled passive-reconnaissance flow with an interactive,
   container-native reconnaissance architecture.
 
-[Unreleased]: https://github.com/amiencoy/Reconnator/compare/v2.2.2...HEAD
-[2.2.2]: https://github.com/amiencoy/Reconnator/compare/v2.2.1...v2.2.2
-[2.2.1]: https://github.com/amiencoy/Reconnator/compare/v2.2.0...v2.2.1
-[2.2.0]: https://github.com/amiencoy/Reconnator/compare/v2.1.0...v2.2.0
-[2.1.0]: https://github.com/amiencoy/Reconnator/compare/v2.0.1...v2.1.0
-[2.0.1]: https://github.com/amiencoy/Reconnator/releases/tag/v2.0.1
-[2.0.0]: https://github.com/amiencoy/Reconnator/commit/9899c7f
+[Unreleased]: https://github.com/amiencoy/lophiarch/compare/v2.2.2...HEAD
+[2.2.2]: https://github.com/amiencoy/lophiarch/compare/v2.2.1...v2.2.2
+[2.2.1]: https://github.com/amiencoy/lophiarch/compare/v2.2.0...v2.2.1
+[2.2.0]: https://github.com/amiencoy/lophiarch/compare/v2.1.0...v2.2.0
+[2.1.0]: https://github.com/amiencoy/lophiarch/compare/v2.0.1...v2.1.0
+[2.0.1]: https://github.com/amiencoy/lophiarch/releases/tag/v2.0.1
+[2.0.0]: https://github.com/amiencoy/lophiarch/commit/9899c7f

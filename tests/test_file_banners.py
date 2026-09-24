@@ -11,7 +11,7 @@ from scripts.check_file_banners import has_feature_banner, missing_banners
 
 
 class FileBannerTests(unittest.TestCase):
-    def test_accepts_reconnator_banner(self):
+    def test_accepts_lophiarch_banner(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "valid.py"
             path.write_text(

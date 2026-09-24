@@ -1,5 +1,5 @@
 # ================================================================================== #
-# This is the main MCP Server module, the absolute backbone of Reconnator's muscles. #
+# This is the main MCP Server module, the absolute backbone of Lophiarch's muscles. #
 # It exposes all our security engines as callable tools for the AI agent.            #
 # I've also wired up the new subdomain recon pipeline here.                          #
 # The flow goes: Subfinder -> OTX (fallback) -> dnsx (to kill the ghost subdomains). #
@@ -21,7 +21,7 @@ from modules.dnsx_engine import run_dnsx
 
 logger = logging.getLogger(__name__)
 
-mcp = FastMCP("ReconnatorCore")
+mcp = FastMCP("LophiarchCore")
 scan_memory = {}
 
 def mark_scan_start():

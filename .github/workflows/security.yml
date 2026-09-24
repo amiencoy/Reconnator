@@ -1,6 +1,6 @@
 # ==================================================================================== #
 # This workflow scans container artifacts for known vulnerabilities with Trivy.       #
-# It provides supply-chain feedback before a Reconnator image is trusted upstream.    #
+# It provides supply-chain feedback before a Lophiarch image is trusted upstream.    #
 # ==================================================================================== #
 
 name: Container security
@@ -39,8 +39,8 @@ jobs:
       - uses: actions/checkout@v7
       - name: Build image for scanning
         run: |
-          docker build --tag reconnator:security-scan .
-          docker run --rm --entrypoint python reconnator:security-scan -c \
+          docker build --tag lophiarch:security-scan .
+          docker run --rm --entrypoint python lophiarch:security-scan -c \
             "from importlib.metadata import version; assert version('msgpack') == '1.2.2'; assert version('setuptools') == '84.0.0'"
       - name: Scan repository dependencies and configuration
         uses: aquasecurity/trivy-action@v0.36.0
@@ -54,7 +54,7 @@ jobs:
       - name: Scan container image
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          image-ref: reconnator:security-scan
+          image-ref: lophiarch:security-scan
           scanners: vuln,secret
           severity: HIGH,CRITICAL
           ignore-unfixed: true

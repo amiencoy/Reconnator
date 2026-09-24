@@ -1,5 +1,5 @@
 # ==================================================================================== #
-# This package exports the provider interfaces used by Reconnator's AI agent core.    #
+# This package exports the provider interfaces used by Lophiarch's AI agent core.    #
 # The abstraction lets local and hosted models share the same execution pipeline.     #
 # ==================================================================================== #
 
